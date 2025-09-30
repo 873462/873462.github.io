@@ -20,3 +20,7 @@ Some ideas I’m working on:
 - For later 
 
 Stay tuned — updates coming soon!
+
+---
+
+[⬅ Back to Home](index.html)
