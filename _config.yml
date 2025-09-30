@@ -1,3 +1,7 @@
 theme: jekyll-theme-architect
+title: My Website
+description: Welcome to my GitHub Pages site!
+
 header_pages:
   - about.md
+  - projects.md
