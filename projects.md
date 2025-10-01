@@ -15,7 +15,8 @@ permalink: /projects/
 
 # My Projects
 
-Planned Projects:  
+Here’s what I plan to work on:  
+
 - 🤖 Robotics Builds  
 - 🚙 Car Projects  
 - 💻 Coding Projects  
