@@ -3,6 +3,11 @@ layout: page
 title: About Me
 ---
 
+<!-- Link custom CSS for this page -->
+<link rel="stylesheet" href="/assets/css/custom-pages.css">
+
+<div class="about-page">
+
 # About Me  
 
 Hi! My name is **Ivan Johnson**.  
