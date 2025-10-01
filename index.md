@@ -1,14 +1,13 @@
 ---
-layout: page
-title: Home
-permalink: /
+layout: default
+title: Architect Theme by Jason Long
 ---
 
-# Welcome to My Website 👋
-
-I’m **Bobawowa Wohjenom**, Grade 11 at **PCSS**.  
-I’m excited about **robotics** 🤖 and **cars** 🚗.  
-
-Check out my pages:  
-- [About Me]({{ "/about/" | relative_url }})  
-- [Projects]({{ "/projects/" | relative_url }})
+<div id="home">
+  <h1>Blog Posts</h1>
+  <ul class="posts">
+    {% for post in site.posts %}
+      <li><span>{{ post.date | date_to_string }}</span> &raquo; <a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></li>
+    {% endfor %}
+  </ul>
+</div>
