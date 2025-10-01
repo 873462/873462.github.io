@@ -20,8 +20,8 @@ I’m in **Grade 11** at **PCSS**.
 I’m excited about **robotics** 🤖 and **cars** 🚗.  
 
 ## Future Projects
-- 🚙 Car models
-- 🤖 Robotics challenges
-- 💻 Coding experiments
+- 🚙 Car models  
+- 🤖 Robotics challenges  
+- 💻 Coding experiments  
 
 [⬅ Back to Home]({{ "/" | relative_url }})
