@@ -3,6 +3,7 @@
   font-family: 'Fira Code', monospace;
   font-size: 17px;
   line-height: 1.5;
+  padding: 2rem;       /* Adds space around content */
 }
 
 /* Projects page */
@@ -10,5 +11,11 @@
   font-family: 'Fira Code', monospace;
   font-size: 17px;
   line-height: 1.5;
+  padding: 2rem;       /* Adds space around content */
 }
+
+/* Headings color */
+.about-page h1, .about-page h2,
+.projects-page h1, .projects-page h2 {
+  color: #2c3e50;
 }
