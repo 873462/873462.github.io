@@ -4,20 +4,24 @@ title: About Me
 permalink: /about/
 ---
 
+<style>
+/* Only for this page */
+.page {
+  font-family: 'Raleway', sans-serif;
+  font-size: 18px;
+  line-height: 1.6;
+}
+</style>
+
 # About Me
 
-Hi! My name is **Ivan Johnson**.  
-I’m currently in **Grade 11** at **PCSS**.  
-
-I’m like **robotics**  and **video games** .  
-This website is where I’ll share my journey, projects, and interests as I keep learning and building.  
+Hi! My name is **Bobawowa Wohjenom**.  
+I’m in **Grade 11** at **PCSS**.  
+I’m excited about **robotics** 🤖 and **cars** 🚗.  
 
 ## Future Projects
-
-I’ll be adding my projects here soon!  
-Some ideas I’m working on:  
-- for later  
-
-Stay tuned — updates coming soon!
+- 🚙 Car models
+- 🤖 Robotics challenges
+- 💻 Coding experiments
 
 [⬅ Back to Home]({{ "/" | relative_url }})
