@@ -7,9 +7,9 @@ permalink: /about/
 <style>
 /* Only for this page */
 .page {
-  font-family: 'Raleway', sans-serif;
-  font-size: 18px;
-  line-height: 1.6;
+  font-family: 'Fira Code', monospace;
+  font-size: 17px;
+  line-height: 1.5;
 }
 </style>
 
