@@ -2,7 +2,6 @@
 layout: page
 title: Projects
 permalink: /projects/
-body_class: projects-page
 ---
 
 # My Projects
