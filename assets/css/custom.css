@@ -1,7 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap');
 
-/* Apply only when body has "fancy" class */
-body.fancy {
+/* About page */
+body.page-about-me {
+  font-family: 'Raleway', sans-serif;
+  font-size: 18px;
+  line-height: 1.6;
+  color: #222;
+}
+
+/* Projects page */
+body.page-projects {
   font-family: 'Raleway', sans-serif;
   font-size: 18px;
   line-height: 1.6;
