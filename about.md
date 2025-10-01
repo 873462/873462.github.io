@@ -3,31 +3,28 @@ layout: page
 title: About Me
 ---
 
-<!-- Link custom CSS for this page -->
 <link rel="stylesheet" href="/assets/css/custom-pages.css">
 
 <div class="about-page">
 
-# About Me  
+# About Me
 
 Hi! My name is **Ivan Johnson**.  
 I’m currently in **Grade 11** at **PCSS**.  
 
-I’m like **robotics**  and **video games** .  
+I’m like **robotics**  and **viedo games** .  
 This website is where I’ll share my journey, projects, and interests as I keep learning and building.  
 
 ---
 
-## Future Projects  
+## Future Projects
 
 I’ll be adding my projects here soon!  
 Some ideas I’m working on:  
-- For later 
+- for later 
 
 Stay tuned — updates coming soon!
 
----
-
-[⬅ Back to Home](index.html)
+[⬅ Back to Home]({{ "/" | relative_url }})
 
 </div>
