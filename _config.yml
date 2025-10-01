@@ -1,7 +1,8 @@
-theme: jekyll-theme-architect
 title: My Website
 description: Welcome to my GitHub Pages site!
+theme: jekyll-theme-architect
 
 header_pages:
+  - index.md
   - about.md
   - projects.md
