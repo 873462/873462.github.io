@@ -1,8 +1,8 @@
 /* About Me page */
 .about-page {
-  font-family: 'Raleway', sans-serif;
-  font-size: 18px;
-  line-height: 1.6;
+  font-family: 'Fira Code', monospace;
+  font-size: 17px;
+  line-height: 1.5;
 }
 
 /* Projects page */
@@ -11,9 +11,4 @@
   font-size: 17px;
   line-height: 1.5;
 }
-
-/* Optional: headings */
-.about-page h1, .about-page h2,
-.projects-page h1, .projects-page h2 {
-  color: #2c3e50;
 }
