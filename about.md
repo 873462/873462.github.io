@@ -29,3 +29,5 @@ Stay tuned — updates coming soon!
 ---
 
 [⬅ Back to Home](index.html)
+
+</div>
