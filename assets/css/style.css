@@ -1,16 +1,1 @@
-/* Import a fun Google Font */
-@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&family=Fira+Code&display=swap');
 
-/* Change body text */
-body {
-  font-family: 'Raleway', sans-serif;
-  line-height: 1.6;
-  font-size: 18px;
-}
-
-/* Headings */
-h1, h2, h3, h4 {
-  font-family: 'Fira Code', monospace;
-  font-weight: 700;
-  color: #2c3e50;
-}
