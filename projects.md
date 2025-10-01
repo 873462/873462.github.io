@@ -1,6 +1,7 @@
 ---
 layout: page
 title: Projects
+class: fancy
 ---
 
 # My Projects  
