@@ -25,3 +25,5 @@ Check back here later — I’ll post updates and details once I start adding pr
 ---
 
 [⬅ Back to Home](index.html)
+
+</div>
