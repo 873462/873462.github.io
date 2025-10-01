@@ -1,6 +1,7 @@
 ---
 layout: page
 title: About Me
+class: fancy
 ---
 
 # About Me  
