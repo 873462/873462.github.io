@@ -4,14 +4,20 @@ title: Projects
 permalink: /projects/
 ---
 
+<style>
+/* Only for this page */
+.page {
+  font-family: 'Fira Code', monospace;
+  font-size: 17px;
+  line-height: 1.5;
+}
+</style>
+
 # My Projects
 
-This is where I’ll share the projects I’m working on and building in the future.
-
-## Planned Projects
-- for later
-
-## Future Updates
-Check back later — I’ll post updates and details once I start adding projects!
+Planned Projects:  
+- 🤖 Robotics Builds  
+- 🚙 Car Projects  
+- 💻 Coding Projects  
 
 [⬅ Back to Home]({{ "/" | relative_url }})
