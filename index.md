@@ -5,9 +5,9 @@ title: Home
 
 # Welcome  
 
-Hi, I’m **[Your Name]** 👋  
+Hi, I’m **[Ivan Johnson]** 👋  
 
-This is my personal website, built with the Architect theme.  
+This is my personal website.  
 
 ## 📌 Quick Links
 - [About Me](about.md)  
