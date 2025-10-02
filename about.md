@@ -3,6 +3,8 @@ layout: default
 title: About Me
 ---
 
+[Home](index.md) | [Projects](projects.md)
+
 # About Me  
 
 Hi, I’m Ivan Johnson 
