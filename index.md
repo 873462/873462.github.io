@@ -5,7 +5,7 @@ title: Home
 
 # Welcome  
 
-Hi, I’m **[Ivan Johnson]** 👋  
+Hi, I’m **Ivan Johnson** 
 
 This is my personal website.  
 
