@@ -4,7 +4,7 @@ title: About Me
 ---
 
 
-[Home](index.md) | [Projects](projects.md)
+[Home](index.md)
 
 # About Me  
 
