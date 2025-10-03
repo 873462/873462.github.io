@@ -1,5 +1,5 @@
 ---
-layout: simple
+layout: default
 title: "DIY Planter Project"
 excerpt: "A fun DIY project where I built a planter from scratch and learned design and crafting techniques."
 ---
