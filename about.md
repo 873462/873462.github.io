@@ -3,6 +3,9 @@ layout: default
 title: About Me
 ---
 
+<h2>{{ site.title }}</h2>
+<p>{{ site.description }}</p>
+
 [Home](index.md) | [Projects](projects.md)
 
 # About Me  
