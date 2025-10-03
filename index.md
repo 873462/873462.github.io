@@ -11,7 +11,6 @@ This is my personal website.
 
 ## 📌 Quick Links
 - [About Me](about.md)  
-- [Projects](projects.md)  
 
 ---
 
@@ -24,5 +23,3 @@ This is my personal website.
     </li>
   {% endfor %}
 </ul>
-
-[See all projects →](projects.md)
