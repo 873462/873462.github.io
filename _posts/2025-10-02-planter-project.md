@@ -38,3 +38,6 @@ Here are some pictures of me assembling it:
 Here’s the final planter:
 
 ![Finished Planter](/assets/images/planter-finished.jpg)
+
+[Home](/)
+
