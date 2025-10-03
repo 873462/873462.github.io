@@ -4,6 +4,8 @@ title: "DIY Planter Project"
 excerpt: "A fun DIY project where I built a planter from scratch and learned design and crafting techniques."
 ---
 
+[Home](/) | [About](/about)
+
 # DIY Planter 🌱  
 
 I recently made a **planter** from scratch! It was a fun project where I learned about design and DIY crafting.  
