@@ -1,15 +1,9 @@
 ---
-layout: simple
+layout: default
 title: Projects
 ---
 
 # My Projects
 
-<ul>
-  {% for post in site.posts %}
-    <li>
-      <a href="{{ post.url }}">{{ post.title }}</a>
-      <p>{{ post.excerpt }}</p>
-    </li>
-  {% endfor %}
-</ul>
+- [DIY Planter Project](_posts/2025-10-02-diy-planter-project.md)  
+  A fun DIY project where I built a planter from scratch.
