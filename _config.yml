@@ -9,3 +9,11 @@ nav:
     link: /
   - name: "About"
     link: /about
+  - name: "Science Hour"
+    link: /sciencehour
+
+# Add new collection for Science Hour events
+collections:
+  sciencehour:
+    output: true
+    permalink: /sciencehour/:title/
