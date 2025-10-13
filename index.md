@@ -9,12 +9,12 @@ Hi, I’m **Ivan Johnson**
 
 This is my personal website.  
 
-## 📌 Quick Links
+##  Quick Links
 - [About Me](about.md)  
 
 ---
 
-## 🚀 Latest Projects  
+##  Latest Projects  
 
 <ul>
   {% for post in site.posts limit:5 %}
