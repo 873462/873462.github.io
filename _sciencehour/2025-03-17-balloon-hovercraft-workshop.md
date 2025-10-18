@@ -8,7 +8,7 @@ date: 2025-03-17
 <p><em>{{ page.date | date: "%B %d, %Y" }}</em></p>
 <hr>
 
-[Science Hour Club](sciencehour.md)
+[Science Hour Club](/sciencehour)
 
 This workshop focused on **air pressure**, **Newton’s Laws of Motion**, and how simple materials can be used to demonstrate powerful physics in action!  
 
@@ -39,4 +39,4 @@ By the end of the event, participants had working hovercrafts zooming across tab
 
 ---
 
-[Science Hour Club](sciencehour.md)
+[Science Hour Club](/sciencehour)
