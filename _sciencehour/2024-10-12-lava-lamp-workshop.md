@@ -21,8 +21,8 @@ By the end of the session, everyone left with their own glowing creation — a b
 ### 🧪 Fluids Race Experiment Photos
 
 <div style="display:flex; flex-wrap:wrap; gap:10px; margin-top:10px;">
-  <img src="/assets/images/fluids_race1.jpg" alt="Fluids race with different density liquids" style="width:48%; border-radius:10px;">
-  <img src="/assets/images/fluids_race2.jpg" alt="Comparing viscosity in fluids race experiment" style="width:48%; border-radius:10px;">
+  <img src="/assets/images/fluids1.jpg" alt="Fluids race with different density liquids" style="width:48%; border-radius:10px;">
+  <img src="/assets/images/fluids2.jpg" alt="Comparing viscosity in fluids race experiment" style="width:48%; border-radius:10px;">
 </div>
 
 ---
@@ -39,6 +39,8 @@ By the end of the session, everyone left with their own glowing creation — a b
   <img src="/assets/images/lavalamp7.jpg" alt="Students comparing different color mixtures" style="width:48%; border-radius:10px;">
   <img src="/assets/images/lavalamp8.jpg" alt="Participants showing off their final lava lamps" style="width:48%; border-radius:10px;">
   <img src="/assets/images/lavalamp9.jpg" alt="Group photo of finished DIY lava lamps" style="width:48%; border-radius:10px;">
+  <img src="/assets/images/lavalamp10.jpg" alt="Group photo of finished DIY lava lamps" style="width:48%; border-radius:10px;">
+  <img src="/assets/images/lavalamp11.jpg" alt="Group photo of finished DIY lava lamps" style="width:48%; border-radius:10px;">
 </div>
 
 ---
