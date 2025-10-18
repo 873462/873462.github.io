@@ -8,7 +8,7 @@ date: 2024-11-02
 <p><em>{{ page.date | date: "%B %d, %Y" }}</em></p>
 <hr>
 
-[Science Hour Club](sciencehour.md)
+[Science Hour Club](/sciencehour)
 
 In this hands-on workshop, participants explored the **science of air pressure** through exciting experiments that brought key concepts to life! 🌬️  
 
@@ -46,4 +46,4 @@ By the end of the session, everyone had a hands-on understanding of how **air pr
 
 ---
 
-[Science Hour Club](sciencehour.md)
+[Science Hour Club](/sciencehour)
