@@ -3,6 +3,8 @@ layout: default
 title: "Science Hour Club"
 ---
 
+[Home](index.md)
+
 <h1>Science Hour Club Events</h1>
 
 {% for event in site.sciencehour reversed %}
