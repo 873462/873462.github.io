@@ -8,6 +8,8 @@ date: 2024-10-12
 <p><em>{{ page.date | date: "%B %d, %Y" }}</em></p>
 <hr>
 
+[Science Hour Club](sciencehour.md)
+
 In this hands-on workshop, participants dove into the **science of density** and created their very own **DIY lava lamps!** 🧪✨  
 
 The session began with a fun “**Fluids Race**” experiment where participants tested how fast different liquids move by racing **water, oil, and syrup** in clear tubes. This visual demonstration helped everyone understand **how density and viscosity** determine how quickly liquids flow — setting the stage for the day’s main activity.
@@ -52,6 +54,8 @@ These bubbles stick to the colored water droplets, carrying them upward through 
 Once the bubbles pop, the heavier water droplets fall again — creating the classic lava-lamp motion.  
 
 It’s a fun, visual way to explore **density, gas formation, and chemical reactions** all in one glowing project!
+
+[Science Hour Club](sciencehour.md)
 
 ---
 
