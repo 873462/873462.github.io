@@ -8,6 +8,8 @@ date: 2025-01-25
 <p><em>{{ page.date | date: "%B %d, %Y" }}</em></p>
 <hr>
 
+[Science Hour Club](sciencehour.md)
+
 In this hands-on workshop, participants explored the **science of forces, energy transfer, and material properties** by designing a protective nest for a dragon’s egg! 🐉🥚  
 
 The session began with exciting demonstrations of key physics concepts:
@@ -42,3 +44,7 @@ By the end of the session, everyone walked away with a better understanding of *
     Your browser does not support the video tag.
   </video>
 </div>
+
+---
+
+[Science Hour Club](sciencehour.md)
