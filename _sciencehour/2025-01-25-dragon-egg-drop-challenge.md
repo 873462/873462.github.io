@@ -8,7 +8,7 @@ date: 2025-01-25
 <p><em>{{ page.date | date: "%B %d, %Y" }}</em></p>
 <hr>
 
-[Science Hour Club](sciencehour.md)
+[Science Hour Club](/sciencehour)
 
 In this hands-on workshop, participants explored the **science of forces, energy transfer, and material properties** by designing a protective nest for a dragon’s egg! 🐉🥚  
 
@@ -47,4 +47,4 @@ By the end of the session, everyone walked away with a better understanding of *
 
 ---
 
-[Science Hour Club](sciencehour.md)
+[Science Hour Club](/sciencehour)
