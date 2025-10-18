@@ -15,7 +15,7 @@ This is my personal website.
 ---
 
 ## Science Hour
-- [Science Hour Club](/sciencehour/)
+- [Science Hour Club](sciencehour.md)
 
 ---
 
