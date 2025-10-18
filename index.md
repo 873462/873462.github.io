@@ -14,6 +14,11 @@ This is my personal website.
 
 ---
 
+## Science Hour
+- [Science Hour Club](/sciencehour/)
+
+---
+
 ##  Latest Projects  
 
 <ul>
