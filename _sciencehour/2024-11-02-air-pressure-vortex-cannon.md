@@ -31,9 +31,6 @@ By the end of the session, everyone had a hands-on understanding of how **air pr
   <img src="/assets/images/airpressure4.jpg" alt="Hulk strength tray lift experiment" style="width:48%; border-radius:10px;">
   <img src="/assets/images/airpressure5.jpg" alt="Tray lift in progress" style="width:48%; border-radius:10px;">
   <img src="/assets/images/airpressure6.jpg" alt="Students lifting tray using air pressure" style="width:48%; border-radius:10px;">
-  <img src="/assets/images/airpressure7.jpg" alt="Balloon and bottle air pressure demo" style="width:48%; border-radius:10px;">
-  <img src="/assets/images/airpressure8.jpg" alt="DIY vortex cannon build" style="width:48%; border-radius:10px;">
-  <img src="/assets/images/airpressure9.jpg" alt="Participants launching marshmallows" style="width:48%; border-radius:10px;">
 </div>
 
 ---
