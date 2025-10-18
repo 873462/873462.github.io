@@ -8,6 +8,8 @@ date: 2024-11-02
 <p><em>{{ page.date | date: "%B %d, %Y" }}</em></p>
 <hr>
 
+[Science Hour Club](sciencehour.md)
+
 In this hands-on workshop, participants explored the **science of air pressure** through exciting experiments that brought key concepts to life! 🌬️  
 
 The session began with an investigation into **trapped air** — participants dipped an upside-down plastic cup into a tray of water and discovered that the inside stayed perfectly dry.  
@@ -41,3 +43,7 @@ By the end of the session, everyone had a hands-on understanding of how **air pr
   <source src="/assets/videos/airpressure-demo.mp4" type="video/mp4">
   Your browser does not support the video tag.
 </video>
+
+---
+
+[Science Hour Club](sciencehour.md)
