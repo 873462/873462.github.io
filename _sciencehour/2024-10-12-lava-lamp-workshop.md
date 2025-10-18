@@ -8,7 +8,7 @@ date: 2024-10-12
 <p><em>{{ page.date | date: "%B %d, %Y" }}</em></p>
 <hr>
 
-[Science Hour Club](/sciencehour/)
+[Science Hour Club](/sciencehour)
 
 In this hands-on workshop, participants dove into the **science of density** and created their very own **DIY lava lamps!** 🧪✨  
 
@@ -55,7 +55,7 @@ Once the bubbles pop, the heavier water droplets fall again — creating the cla
 
 It’s a fun, visual way to explore **density, gas formation, and chemical reactions** all in one glowing project!
 
-[Science Hour Club](/sciencehour/)
+[Science Hour Club](/sciencehour)
 
 ---
 
