@@ -28,8 +28,3 @@ This is my personal website.
     </li>
   {% endfor %}
 </ul>
-
-
-### [Anscombe’s Quartet – Data Visualization Blog](posts/anscombe-eda/)
-An in-depth analysis of how identical statistics can create visually different datasets.
-
