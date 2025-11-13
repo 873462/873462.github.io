@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: default
 title: "Anscombe’s Quartet – Exploratory Data Analysis (EDA)"
 author: Ivan Johnson
 date: 2025-10-08
