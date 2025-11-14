@@ -5,6 +5,8 @@ author: Ivan Johnson
 date: 2025-10-08
 ---
 
+[Home](/) | [About](/about)
+
 # Anscombe’s Quartet – Exploratory Data Analysis (EDA)
 *By Ivan Johnson — October 9, 2025*
 
@@ -77,3 +79,4 @@ Each dataset was plotted with a regression line:
 
 <iframe src="../assets/anscombe_plotly.html" width="100%" height="600px"></iframe>
 
+[Home](/)
