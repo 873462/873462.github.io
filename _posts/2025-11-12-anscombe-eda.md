@@ -12,7 +12,7 @@ date: 2025-10-08
 
 [Home](/)
 
-[Download CSV data](/assets/images/anscombe.csv) | [Download full PDF report](/assets/images/anscombe_eda(1).pdf)
+[Download CSV data](/assets/images/anscombe.csv) | [Download full PDF report](/assets/images/anscombe_eda.pdf)
 
 ---
 
