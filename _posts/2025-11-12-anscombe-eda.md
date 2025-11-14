@@ -12,8 +12,7 @@ date: 2025-10-08
 
 [Home](/)
 
-[Download CSV data](/assets/images/anscombe.csv)
-[Download full PDF report](/assets/images/anscombe_eda(1).pdf)
+[Download CSV data](/assets/images/anscombe.csv) | [Download full PDF report](/assets/images/anscombe_eda(1).pdf)
 
 ---
 
@@ -55,21 +54,6 @@ This is the foundation of **Exploratory Data Analysis (EDA)**, which combines:
 - pattern recognition  
 
 EDA is used across science, engineering, finance, and data science to improve accuracy, reduce risk, and avoid decision-making errors. Anscombe’s Quartet shows why visualization is mandatory in any serious analysis.
-
----
-
-# Data Source & Loading
-
-The dataset used here is Seaborn’s built-in `anscombe` dataset. To reproduce the figures and files, run the provided Python script `scripts/generate_anscombe_assets.py` (instructions below). That script will create the following files in `/assets/`:
-
-- `anscombe.csv`  
-- `anscombe_scatter.png` (individual dataset scatter plots with regression lines)  
-- `anscombe_combined.png` (all datasets combined)  
-- `anscombe_box.png`  
-- `anscombe_violin_xy.png`  
-- `residual_1.png`, `residual_2.png`, `residual_3.png`, `residual_4.png`  
-- `anscombe_plotly.html` (interactive)  
-- `anscombe_eda.pdf` (single PDF with figures and summary)
 
 ---
 
@@ -171,7 +155,7 @@ Residual plots show patterns that indicate poor linear fit or the presence of ou
 ## Interactive Plot (Plotly)
 Use this interactive Plotly visualization to hover, zoom, and inspect individual points.
 
-<iframe src="../assets/anscombe_plotly.html" width="100%" height="600px"></iframe>
+<iframe src="/assets/images/anscombe_plotly.html" width="100%" height="600px"></iframe>
 
 ---
 
