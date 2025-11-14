@@ -5,15 +5,15 @@ author: Ivan Johnson
 date: 2025-10-08
 ---
 
-[Home](/)
-
 # Anscombe’s Quartet – Exploratory Data Analysis (EDA)
 *By Ivan Johnson — October 9, 2025*
 
 ---
 
-[Download CSV data](../assets/anscombe.csv){: .button }
-[Download full PDF report](../assets/anscombe_eda.pdf){: .button }
+[Home](/)
+
+[Download CSV data](/assets/images/anscombe.csv)
+[Download full PDF report](/assets/images/anscombe_eda(1).pdf)
 
 ---
 
@@ -123,7 +123,7 @@ Despite these similarities, the datasets reveal drastically different shapes whe
 ## Scatter Plots (Individual Datasets)
 These reveal the true differences in patterns — each dataset plotted with a regression line.
 
-![Scatter Plots (I–IV)](../assets/anscombe_scatter.png)
+![Scatter Plots (I–IV)](/assets/images/anscombe_scatter.png)
 
 *Figure: Scatter plots for datasets I, II, III, IV (with regression lines).*
 
@@ -132,7 +132,7 @@ These reveal the true differences in patterns — each dataset plotted with a re
 ## Combined Scatter Plot
 All datasets shown together to emphasize that summary statistics overlap while shapes do not.
 
-![Combined Plot](../assets/anscombe_combined.png)
+![Combined Plot](/assets/images/anscombe_combined.png)
 
 *Figure: Combined view of all four datasets colored by dataset.*
 
@@ -141,7 +141,7 @@ All datasets shown together to emphasize that summary statistics overlap while s
 ## Box Plots
 Box plots show median, IQR, and potential outliers for X and Y across datasets.
 
-![Box Plots](../assets/anscombe_box.png)
+![Box Plots](/assets/images/anscombe_box.png)
 
 *Figure: Box plots for X (and/or Y) across datasets.*
 
@@ -150,7 +150,7 @@ Box plots show median, IQR, and potential outliers for X and Y across datasets.
 ## Violin Plots
 Violin plots show the distribution/density of X and Y values for each dataset.
 
-![Violin Plots](../assets/anscombe_violin_xy.png)
+![Violin Plots](/assets/images/anscombe_violin_xy.png)
 
 *Figure: Violin plots visualizing distributions of X and Y.*
 
@@ -159,10 +159,10 @@ Violin plots show the distribution/density of X and Y values for each dataset.
 ## Residual Plots
 Residual plots show patterns that indicate poor linear fit or the presence of outliers.
 
-![Residual Plot - Dataset I](../assets/residual_1.png)
-![Residual Plot - Dataset II](../assets/residual_2.png)
-![Residual Plot - Dataset III](../assets/residual_3.png)
-![Residual Plot - Dataset IV](../assets/residual_4.png)
+![Residual Plot - Dataset I](/assets/images/residual_1.png)
+![Residual Plot - Dataset II](/assets/images/residual_2.png)
+![Residual Plot - Dataset III](/assets/images/residual_3.png)
+![Residual Plot - Dataset IV](/assets/images/residual_4.png)
 
 *Figure: Residual diagnostics for each dataset.*
 
