@@ -69,13 +69,11 @@ Each dataset was plotted with a regression line:
 **III** — strong outlier  
 **IV** — vertical line shape  
 
-Add this image to your website:
+![Anscombe Scatter](/assets/images/anscombe_scatter.png)
 
-![Anscombe Scatter](../assets/anscombe_scatter.png)
+![Combined Plot](/assets/images/anscombe_combined.png)
 
-![Combined Plot](../assets/anscombe_combined.png)
-
-![Violin Plots](../assets/anscombe_violin_xy.png)
+![Violin Plots](/assets/images/anscombe_violin_xy.png)
 
 <iframe src="../assets/anscombe_plotly.html" width="100%" height="600px"></iframe>
 
