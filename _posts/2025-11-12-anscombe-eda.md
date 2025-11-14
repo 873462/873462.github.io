@@ -125,7 +125,7 @@ All datasets shown together to emphasize that summary statistics overlap while s
 ## Box Plots
 Box plots show median, IQR, and potential outliers for X and Y across datasets.
 
-![Box Plots](/assets/images/anscombe_box.png)
+![Box Plots](/assets/images/boxplots_xy-checkpoint.png)
 
 *Figure: Box plots for X (and/or Y) across datasets.*
 
@@ -143,10 +143,10 @@ Violin plots show the distribution/density of X and Y values for each dataset.
 ## Residual Plots
 Residual plots show patterns that indicate poor linear fit or the presence of outliers.
 
-![Residual Plot - Dataset I](/assets/images/residual_1.png)
-![Residual Plot - Dataset II](/assets/images/residual_2.png)
-![Residual Plot - Dataset III](/assets/images/residual_3.png)
-![Residual Plot - Dataset IV](/assets/images/residual_4.png)
+![Residual Plot - Dataset I](/assets/images/residuals_I.png)
+![Residual Plot - Dataset II](/assets/images/residuals_II.png)
+![Residual Plot - Dataset III](/assets/images/residuals_III.png)
+![Residual Plot - Dataset IV](/assets/images/residuals_IV.png)
 
 *Figure: Residual diagnostics for each dataset.*
 
