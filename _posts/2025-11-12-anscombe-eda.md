@@ -77,6 +77,6 @@ Each dataset was plotted with a regression line:
 
 ![Violin Plots](/assets/images/anscombe_violin_xy.png)
 
-<iframe src="../assets/anscombe_plotly.html" width="100%" height="600px"></iframe>
+<iframe src="/assets/images/anscombe_plotly.html" width="100%" height="600px"></iframe>
 
 [Home](/)
