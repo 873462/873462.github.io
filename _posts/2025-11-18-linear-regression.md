@@ -8,7 +8,7 @@ excerpt: "A blog about understanding linear regression"
 This post is based on the Jupyter notebook **`linear-regression-tutorial.ipynb`** from the following GitHub commit:
 
 **Notebook Link:**  
-https://github.com/mrandrewandrade/TER/blob/f33c0606f1b182e7d84554032ba7f8e46d3ba845/linear-regression-tutorial.ipynb
+[Notebook Link](/assets/images/TER_improved.ipynb)
 
 All cells in the notebook were run successfully, and this post summarizes what the notebook does and answers the questions included in it.
 
