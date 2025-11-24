@@ -11,7 +11,7 @@ layout: default
 ## Overview
 This post walks through the applied linear regression tasks (simple and multiple) using the *Auto* dataset from the ISLR/ISLP collection. I performed model fitting with `statsmodels`, created diagnostic plots, investigated interactions, and tested a few transformations.
 
-[Link to the notebook (GitHub) — `auto_regression.ipynb`](./auto_regression.ipynb)
+[Link to the notebook (GitHub) — `auto_regression.ipynb`](/assets/images/auto_regression.ipynb)
 
 ## Task A — Simple Linear Regression (mpg ~ horsepower)
 
