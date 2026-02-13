@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "Earthquake & Wind Challenge"
+title: "Workshop 5: Earthquake & Wind Challenge"
 date: 2026-02-13
 ---
 
@@ -42,9 +42,9 @@ Most importantly, they learned that failure isn’t the end — it’s part of t
 ### Building in Progress
 
 <div style="display:flex; flex-wrap:wrap; gap:10px; margin-top:10px;">
-  <img src="/assets/images/structure_build1.jpg" alt="Students designing and building tall structure" style="width:48%; border-radius:10px;">
-  <img src="/assets/images/structure_build2.jpg" alt="Team working on stabilizing tower base" style="width:48%; border-radius:10px;">
-  <img src="/assets/images/structure_build3.jpg" alt="Close-up of tower framework during construction" style="width:48%; border-radius:10px;">
+  <img src="/assets/images/structure_build1.jpeg" alt="Students designing and building tall structure" style="width:48%; border-radius:10px;">
+  <img src="/assets/images/structure_build2.jpeg" alt="Team working on stabilizing tower base" style="width:48%; border-radius:10px;">
+  <img src="/assets/images/structure_build3.jpeg" alt="Close-up of tower framework during construction" style="width:48%; border-radius:10px;">
 </div>
 
 ---
@@ -52,9 +52,9 @@ Most importantly, they learned that failure isn’t the end — it’s part of t
 ### Final Structures & Testing
 
 <div style="display:flex; flex-wrap:wrap; gap:10px; margin-top:10px;">
-  <img src="/assets/images/structure_final1.jpg" alt="Finished tall structure before earthquake test" style="width:48%; border-radius:10px;">
-  <img src="/assets/images/structure_final2.jpg" alt="Tower surviving wind gust from fan" style="width:48%; border-radius:10px;">
-  <img src="/assets/images/structure_final3.jpg" alt="Group showing off completed earthquake-resistant towers" style="width:48%; border-radius:10px;">
+  <img src="/assets/images/structure_final1.jpeg" alt="Finished tall structure before earthquake test" style="width:48%; border-radius:10px;">
+  <img src="/assets/images/structure_final2.jpeg" alt="Tower surviving wind gust from fan" style="width:48%; border-radius:10px;">
+  <img src="/assets/images/structure_final3.jpeg" alt="Group showing off completed earthquake-resistant towers" style="width:48%; border-radius:10px;">
 </div>
 
 ---
