@@ -10,7 +10,8 @@ date: 2026-02-13
 
 [Science Hour Club](/sciencehour)
 
-In this hands-on engineering workshop, participants explored the science of **stability, structural design, and forces** by building towers designed to survive extreme conditions! 🌪️🏗️  
+In this hands-on engineering workshop, participants explored the science of **stability, structural design, and forces** by building towers designed to survive extreme conditions!
+  
 
 The session began with a short discussion on **center of mass, base width, weight distribution, and structural reinforcement.** We talked about how real engineers design skyscrapers and bridges to withstand **earthquakes and strong winds**, and what makes certain shapes more stable than others.
 
