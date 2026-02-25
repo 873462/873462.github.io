@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Justice Simulator 1754 BCE</title>
+    <style>
+        body {
+            font-family: Georgia, serif;
+            background-color: #2b1d0e;
+            color: #f5e6c8;
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            font-size: 40px;
+            color: gold;
+        }
+
+        .case-box {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #3b2a16;
+            border-radius: 10px;
+        }
+
+        button {
+            background-color: gold;
+            border: none;
+            padding: 10px 20px;
+            margin: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background-color: orange;
+        }
+
+        #result {
+            margin-top: 20px;
+            font-weight: bold;
+            color: lightgreen;
+        }
+    </style>
+</head>
+
+<body>
+
+<h1>⚖ Justice Simulator 1754 BCE ⚖</h1>
+<p>You are a Babylonian judge. Decide the fate of the accused.</p>
+
+<div class="case-box">
+    <h2>Case 1: The Injured Eye</h2>
+    <p>A man destroys the eye of another man during a fight.</p>
+
+    <button onclick="choose('fine')">Fine Him</button>
+    <button onclick="choose('jail')">Imprison Him</button>
+    <button onclick="choose('eye')">Destroy His Eye</button>
+
+    <div id="result"></div>
+</div>
+
+<script>
+    function choose(choice) {
+        let resultText = "";
+
+        if (choice === "eye") {
+            resultText = "Correct according to Hammurabi: 'An eye for an eye.'";
+        } else {
+            resultText = "In Babylon, this would be wrong. The law required equal physical retaliation.";
+        }
+
+        document.getElementById("result").innerText = resultText;
+    }
+</script>
+
+</body>
+</html>
