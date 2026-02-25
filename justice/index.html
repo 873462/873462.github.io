@@ -1,79 +1,219 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Justice Simulator 1754 BCE</title>
-    <style>
-        body {
-            font-family: Georgia, serif;
-            background-color: #2b1d0e;
-            color: #f5e6c8;
-            text-align: center;
-            margin: 0;
-            padding: 20px;
-        }
+<meta charset="UTF-8">
+<title>Justice Simulator 1754 BCE</title>
 
-        h1 {
-            font-size: 40px;
-            color: gold;
-        }
+<style>
+body {
+    font-family: Georgia, serif;
+    background: linear-gradient(to bottom, #2b1d0e, #1a1208);
+    color: #f5e6c8;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
 
-        .case-box {
-            margin-top: 30px;
-            padding: 20px;
-            background-color: #3b2a16;
-            border-radius: 10px;
-        }
+header {
+    padding: 20px;
+    background-color: #3b2a16;
+}
 
-        button {
-            background-color: gold;
-            border: none;
-            padding: 10px 20px;
-            margin: 10px;
-            font-size: 16px;
-            cursor: pointer;
-            border-radius: 5px;
-        }
+h1 {
+    color: gold;
+    font-size: 42px;
+    margin-bottom: 5px;
+}
 
-        button:hover {
-            background-color: orange;
-        }
+#game-container {
+    padding: 30px;
+}
 
-        #result {
-            margin-top: 20px;
-            font-weight: bold;
-            color: lightgreen;
-        }
-    </style>
+.case-box {
+    background-color: #3b2a16;
+    padding: 25px;
+    border-radius: 10px;
+    max-width: 700px;
+    margin: auto;
+    margin-top: 20px;
+    transition: opacity 0.5s ease-in-out;
+}
+
+button {
+    background-color: gold;
+    border: none;
+    padding: 10px 18px;
+    margin: 10px;
+    font-size: 15px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+button:hover {
+    background-color: orange;
+}
+
+img {
+    max-width: 100%;
+    border-radius: 8px;
+    margin-top: 15px;
+}
+
+#result {
+    margin-top: 20px;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+#progress {
+    margin-top: 15px;
+    font-size: 14px;
+}
+
+footer {
+    margin-top: 30px;
+    padding: 20px;
+    background-color: #3b2a16;
+    font-size: 14px;
+}
+</style>
 </head>
 
 <body>
 
+<header>
 <h1>⚖ Justice Simulator 1754 BCE ⚖</h1>
-<p>You are a Babylonian judge. Decide the fate of the accused.</p>
+<p>You are a Babylonian judge. Your rulings shape justice.</p>
+<div id="progress"></div>
+</header>
 
-<div class="case-box">
-    <h2>Case 1: The Injured Eye</h2>
-    <p>A man destroys the eye of another man during a fight.</p>
+<div id="game-container"></div>
 
-    <button onclick="choose('fine')">Fine Him</button>
-    <button onclick="choose('jail')">Imprison Him</button>
-    <button onclick="choose('eye')">Destroy His Eye</button>
-
-    <div id="result"></div>
-</div>
+<footer>
+<p>Based on laws from the Code of Hammurabi (c. 1754 BCE)</p>
+</footer>
 
 <script>
-    function choose(choice) {
-        let resultText = "";
+const cases = [
+{
+    title: "Case 1: The Injured Eye",
+    text: "A man destroys the eye of another man during a fight.",
+    law: "Law #196: 'If a man destroy the eye of another man, they shall destroy his eye.'",
+    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Code-de-Hammurabi-1.jpg/400px-Code-de-Hammurabi-1.jpg",
+    correct: "eye",
+    options: [
+        {text: "Fine Him", value: "fine", harsh: 0},
+        {text: "Imprison Him", value: "jail", harsh: 1},
+        {text: "Destroy His Eye", value: "eye", harsh: 2}
+    ]
+},
+{
+    title: "Case 2: The Collapsed House",
+    text: "A builder constructs a house. It collapses and kills the owner.",
+    law: "Law #229: 'If a builder builds a house and it collapses and kills the owner, the builder shall be put to death.'",
+    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Babylonian_house_model.jpg/400px-Babylonian_house_model.jpg",
+    correct: "death",
+    options: [
+        {text: "Sue for Compensation", value: "fine", harsh: 0},
+        {text: "Imprison Builder", value: "jail", harsh: 1},
+        {text: "Execute Builder", value: "death", harsh: 2}
+    ]
+},
+{
+    title: "Case 3: The Stolen Ox",
+    text: "A man steals an ox from another citizen.",
+    law: "Law #8: 'If a man steal an ox... he shall repay thirtyfold.'",
+    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d2/Bull_Louvre_AO19804.jpg/400px-Bull_Louvre_AO19804.jpg",
+    correct: "repay",
+    options: [
+        {text: "Warning Only", value: "warn", harsh: 0},
+        {text: "Repay Once", value: "small", harsh: 1},
+        {text: "Repay Thirtyfold", value: "repay", harsh: 2}
+    ]
+}
+];
 
-        if (choice === "eye") {
-            resultText = "Correct according to Hammurabi: 'An eye for an eye.'";
-        } else {
-            resultText = "In Babylon, this would be wrong. The law required equal physical retaliation.";
-        }
+let currentCase = 0;
+let harshnessScore = 0;
 
-        document.getElementById("result").innerText = resultText;
+function loadCase() {
+    const container = document.getElementById("game-container");
+    const progress = document.getElementById("progress");
+
+    if (currentCase >= cases.length) {
+        showFinalScreen();
+        return;
     }
+
+    const c = cases[currentCase];
+
+    progress.innerText = `Case ${currentCase + 1} of ${cases.length}`;
+
+    container.innerHTML = `
+        <div class="case-box">
+            <h2>${c.title}</h2>
+            <p>${c.text}</p>
+            <img src="${c.image}">
+            <div id="options"></div>
+            <div id="result"></div>
+        </div>
+    `;
+
+    const optionsDiv = document.getElementById("options");
+    c.options.forEach(option => {
+        const btn = document.createElement("button");
+        btn.innerText = option.text;
+        btn.onclick = () => choose(option.value, option.harsh);
+        optionsDiv.appendChild(btn);
+    });
+}
+
+function choose(choice, harshValue) {
+    const resultDiv = document.getElementById("result");
+    const correctAnswer = cases[currentCase].correct;
+
+    harshnessScore += harshValue;
+
+    if (choice === correctAnswer) {
+        resultDiv.innerHTML = "✔ This matches Hammurabi's law.<br><br>" + cases[currentCase].law;
+    } else {
+        resultDiv.innerHTML = "✖ In Babylon, this would be incorrect.<br><br>" + cases[currentCase].law;
+    }
+
+    const nextBtn = document.createElement("button");
+    nextBtn.innerText = "Next Case";
+    nextBtn.onclick = () => {
+        currentCase++;
+        loadCase();
+    };
+
+    resultDiv.appendChild(document.createElement("br"));
+    resultDiv.appendChild(nextBtn);
+}
+
+function showFinalScreen() {
+    const container = document.getElementById("game-container");
+    let judgment;
+
+    if (harshnessScore >= 5) {
+        judgment = "You ruled with fear and strict retaliation.";
+    } else if (harshnessScore >= 3) {
+        judgment = "You balanced fairness and punishment.";
+    } else {
+        judgment = "You showed mercy compared to ancient Babylon.";
+    }
+
+    container.innerHTML = `
+        <div class="case-box">
+            <h2>Final Judgment</h2>
+            <p>${judgment}</p>
+            <p>Your Harshness Score: ${harshnessScore}</p>
+            <p>Hammurabi's system focused on strict, equal retaliation and maintaining social order. Modern systems emphasize investigation, proportionality, and rights.</p>
+        </div>
+    `;
+}
+
+loadCase();
 </script>
 
 </body>
