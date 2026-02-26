@@ -201,12 +201,12 @@ function restartGame(){
     loadCase();
 }
 
-function drawVisual(caseNum){
+function drawVisual(caseNum, outcome=false){
+
     let canvas = document.getElementById("visual");
     let ctx = canvas.getContext("2d");
     ctx.clearRect(0,0,600,300);
 
-    // Background sand ground
     ctx.fillStyle = "#d2b48c";
     ctx.fillRect(0,0,600,300);
 
@@ -216,129 +216,203 @@ function drawVisual(caseNum){
     ctx.fillStyle = "#000";
     ctx.lineWidth = 3;
 
-    // CASE 1 — HOUSE COLLAPSE ANIMATION
-    if(caseNum === 0){
-        let collapse = false;
+    function stickFigure(x,y,label,small=false,eyeX=false,vest=false,missingHand=false){
+        let size = small ? 15 : 25;
 
-        function drawHouse(offset){
-            ctx.fillStyle = "#654321";
-            ctx.fillRect(200,120 + offset,200,100);
-            ctx.fillRect(250,80 + offset,100,40);
+        // head
+        ctx.beginPath();
+        ctx.arc(x,y,size,0,Math.PI*2);
+        ctx.stroke();
+
+        // eye
+        if(eyeX){
+            ctx.fillText("X",x-5,y+5);
+        } else {
+            ctx.fillText(".",x-3,y+5);
         }
 
-        drawHouse(0);
+        // body
+        ctx.beginPath();
+        ctx.moveTo(x,y+size);
+        ctx.lineTo(x,y+size+40);
+        ctx.stroke();
 
-        setTimeout(() => {
-            ctx.clearRect(0,0,600,300);
-            ctx.fillStyle = "#d2b48c";
-            ctx.fillRect(0,0,600,300);
-            ctx.fillStyle = "#8b5a2b";
-            ctx.fillRect(0,220,600,80);
+        // arms
+        if(!missingHand){
+            ctx.beginPath();
+            ctx.moveTo(x-20,y+size+10);
+            ctx.lineTo(x+20,y+size+10);
+            ctx.stroke();
+        }
 
-            // rubble
-            ctx.fillStyle = "#654321";
-            for(let i=0;i<8;i++){
-                ctx.fillRect(200 + i*25, 180 + Math.random()*20, 20, 20);
+        // legs
+        ctx.beginPath();
+        ctx.moveTo(x,y+size+40);
+        ctx.lineTo(x-15,y+size+70);
+        ctx.moveTo(x,y+size+40);
+        ctx.lineTo(x+15,y+size+70);
+        ctx.stroke();
+
+        // vest for builder
+        if(vest){
+            ctx.fillStyle="orange";
+            ctx.fillRect(x-10,y+size+5,20,25);
+            ctx.fillStyle="#000";
+        }
+
+        ctx.fillText(label,x-20,y+size+95);
+    }
+
+    // =====================
+    // CASE 1 HOUSE COLLAPSE
+    // =====================
+    if(caseNum===0){
+
+        if(!outcome){
+            // normal house
+            ctx.fillStyle="#654321";
+            ctx.fillRect(200,120,200,100);
+            ctx.fillRect(250,80,100,40);
+
+            setTimeout(()=>{
+                ctx.clearRect(0,0,600,300);
+                ctx.fillStyle="#d2b48c";
+                ctx.fillRect(0,0,600,300);
+                ctx.fillStyle="#8b5a2b";
+                ctx.fillRect(0,220,600,80);
+
+                for(let i=0;i<10;i++){
+                    ctx.fillRect(220+i*20,170+Math.random()*30,20,20);
+                }
+                ctx.fillText("House Collapses!",230,60);
+            },1000);
+
+        } else {
+            // builder punishment (symbolic)
+            stickFigure(300,120,"Builder",false,false,true);
+            ctx.fillText("⚔ Execution",260,60);
+        }
+    }
+
+    // =====================
+    // CASE 2 FALSE ACCUSER
+    // =====================
+    if(caseNum===1){
+
+        if(!outcome){
+
+            stickFigure(200,120,"Accuser");
+            stickFigure(400,120,"Accused");
+
+            // pointing arm animation
+            ctx.beginPath();
+            ctx.moveTo(220,155);
+            ctx.lineTo(350,155);
+            ctx.stroke();
+
+            ctx.fillText("No Evidence!",230,80);
+
+        } else {
+            stickFigure(300,120,"False Accuser");
+            ctx.fillText("⚔ Execution",260,60);
+        }
+    }
+
+    // =====================
+    // CASE 3 STOLEN OX
+    // =====================
+    if(caseNum===2){
+
+        if(!outcome){
+
+            // owner
+            stickFigure(150,120,"Owner");
+
+            // thief
+            stickFigure(450,120,"Thief");
+
+            // ox
+            ctx.fillStyle="#5c4033";
+            ctx.fillRect(250,150,120,60);
+            ctx.fillRect(370,160,40,40);
+
+            ctx.fillText("OX",285,145);
+
+            // tag
+            ctx.fillStyle="yellow";
+            ctx.fillRect(280,170,20,15);
+            ctx.fillText("A",285,182);
+            ctx.fillText("Tag A",110,90);
+
+            // arrow motion
+            ctx.beginPath();
+            ctx.moveTo(310,170);
+            ctx.lineTo(400,170);
+            ctx.stroke();
+
+        } else {
+
+            stickFigure(150,120,"Owner");
+
+            for(let i=0;i<5;i++){
+                ctx.fillRect(250+i*30,170,20,20);
             }
-
-            ctx.fillStyle = "red";
-            ctx.font = "18px Papyrus";
-            ctx.fillText("The house has collapsed!", 200, 60);
-        }, 1000);
+            ctx.fillText("30x Repayment",220,60);
+        }
     }
 
-    // CASE 2 — FALSE ACCUSER
-    if(caseNum === 1){
-        // Two people
-        ctx.beginPath();
-        ctx.arc(200,150,30,0,Math.PI*2);
-        ctx.stroke();
-        ctx.fillText("Accuser",165,200);
+    // =====================
+    // CASE 4 SON STRIKES FATHER
+    // =====================
+    if(caseNum===3){
 
-        ctx.beginPath();
-        ctx.arc(400,150,30,0,Math.PI*2);
-        ctx.stroke();
-        ctx.fillText("Accused",370,200);
+        if(!outcome){
 
-        // pointing line
-        ctx.beginPath();
-        ctx.moveTo(230,150);
-        ctx.lineTo(370,150);
-        ctx.stroke();
+            stickFigure(250,120,"Father");
+            stickFigure(350,120,"Son",true);
 
-        ctx.font = "22px Papyrus";
-        ctx.fillText("⚖",290,80);
+            // hit animation
+            ctx.beginPath();
+            ctx.moveTo(330,155);
+            ctx.lineTo(270,155);
+            ctx.stroke();
+
+            ctx.fillText("Strike!",280,80);
+
+        } else {
+
+            stickFigure(250,120,"Father");
+            stickFigure(350,120,"Son",true,false,false,true);
+            ctx.fillText("Hands Removed",230,60);
+        }
     }
 
-    // CASE 3 — STOLEN OX (CLEAR OX SHAPE)
-    if(caseNum === 2){
-        ctx.fillStyle = "#5c4033";
-        ctx.fillRect(220,150,160,60); // body
-        ctx.fillRect(360,160,40,40);  // head
-        ctx.fillRect(250,210,20,40);  // legs
-        ctx.fillRect(300,210,20,40);
-        ctx.fillRect(340,210,20,40);
+    // =====================
+    // CASE 5 EYE FOR EYE
+    // =====================
+    if(caseNum===4){
 
-        // horns
-        ctx.beginPath();
-        ctx.moveTo(360,160);
-        ctx.lineTo(350,140);
-        ctx.stroke();
+        if(!outcome){
 
-        ctx.beginPath();
-        ctx.moveTo(400,160);
-        ctx.lineTo(410,140);
-        ctx.stroke();
+            stickFigure(250,120,"Person A");
+            stickFigure(350,120,"Person B",false,true);
 
-        ctx.fillStyle = "#000";
-        ctx.fillText("OX",285,145);
+            ctx.beginPath();
+            ctx.moveTo(270,155);
+            ctx.lineTo(330,155);
+            ctx.stroke();
 
-        ctx.fillStyle = "red";
-        ctx.fillText("STOLEN",260,80);
-    }
+            ctx.fillText("Eye Injury",260,80);
 
-    // CASE 4 — STRIKING FATHER
-    if(caseNum === 3){
-        // father
-        ctx.beginPath();
-        ctx.arc(250,150,30,0,Math.PI*2);
-        ctx.stroke();
-        ctx.fillText("Father",220,200);
+        } else {
 
-        // son
-        ctx.beginPath();
-        ctx.arc(350,150,30,0,Math.PI*2);
-        ctx.stroke();
-        ctx.fillText("Son",330,200);
-
-        // action line (non-graphic)
-        ctx.beginPath();
-        ctx.moveTo(320,150);
-        ctx.lineTo(280,150);
-        ctx.stroke();
-
-        ctx.fillStyle = "red";
-        ctx.fillText("Strike",280,120);
-    }
-
-    // CASE 5 — EYE FOR AN EYE (SYMBOLIC)
-    if(caseNum === 4){
-        ctx.beginPath();
-        ctx.arc(250,150,40,0,Math.PI*2);
-        ctx.stroke();
-        ctx.beginPath();
-        ctx.arc(350,150,40,0,Math.PI*2);
-        ctx.stroke();
-
-        ctx.fillStyle = "#000";
-        ctx.fillText("Eye",230,210);
-        ctx.fillText("Eye",330,210);
-
-        ctx.font = "26px Papyrus";
-        ctx.fillText("⚖ Equal Justice ⚖",200,80);
+            stickFigure(250,120,"Person A",false,true);
+            stickFigure(350,120,"Person B",false,true);
+            ctx.fillText("Equal Justice",240,60);
+        }
     }
 }
-
+    
 </script>
 
 </body>
