@@ -1,254 +1,243 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8">
 <title>Justice Simulator 1754 BCE</title>
-
 <style>
 body {
     margin: 0;
-    font-family: Georgia, serif;
-    background: radial-gradient(circle at center, #3b2a16, #1a1208);
-    color: #e8d8b0;
+    font-family: "Papyrus", fantasy;
+    background: linear-gradient(#2c1b0f, #1a0f08);
+    color: #f4e6c8;
     text-align: center;
 }
 
-h1 {
-    font-size: 42px;
-    color: gold;
-    text-shadow: 2px 2px 8px black;
-}
-
-.screen {
-    padding: 40px;
-    animation: fadeIn 0.8s ease-in-out;
-}
-
-.case-box {
-    background: linear-gradient(145deg, #4a351d, #2f2112);
-    border: 3px solid #a67c00;
-    border-radius: 15px;
-    padding: 30px;
-    max-width: 800px;
+#container {
+    padding: 20px;
+    max-width: 900px;
     margin: auto;
-    box-shadow: 0 0 25px black;
+}
+
+h1 {
+    font-size: 48px;
+    text-shadow: 3px 3px #000;
 }
 
 button {
-    background: linear-gradient(145deg, #c9a227, #a67c00);
-    border: none;
+    background: linear-gradient(#8b5a2b, #5a3a1b);
+    color: #fff8dc;
+    border: 3px solid #3e2a14;
     padding: 12px 20px;
     margin: 8px;
-    font-size: 15px;
     cursor: pointer;
-    border-radius: 6px;
-    font-weight: bold;
-    transition: 0.2s;
+    font-size: 16px;
+    transition: transform 0.2s, background 0.3s;
 }
 
-button:hover { transform: scale(1.05); }
+button:hover {
+    transform: scale(1.05);
+    background: linear-gradient(#a66b3d, #6a4422);
+}
+
 button:disabled {
-    background: #555;
+    opacity: 0.6;
     cursor: not-allowed;
 }
 
-.visual {
-    font-size: 60px;
-    margin: 15px 0;
+#visual {
+    margin: 20px auto;
+    border: 5px solid #3e2a14;
+    background: #d2b48c;
 }
 
-#harshness-bar {
-    width: 70%;
-    height: 20px;
-    background-color: #333;
-    margin: 15px auto;
-    border-radius: 10px;
-    overflow: hidden;
+#feedback {
+    margin-top: 20px;
+    font-size: 18px;
 }
 
-#harshness-fill {
-    height: 100%;
-    width: 0%;
-    background: linear-gradient(to right, green, yellow, red);
-    transition: width 0.5s;
-}
-
-@keyframes fadeIn {
-    from {opacity: 0;}
-    to {opacity: 1;}
+.hidden {
+    display: none;
 }
 </style>
 </head>
 
 <body>
 
-<div id="app"></div>
+<div id="container">
+
+<div id="startScreen">
+    <h1>⚖️ Justice Simulator 1754 BCE ⚖️</h1>
+    <p>You are about to serve as a Babylonian judge under King Hammurabi.</p>
+    <p>For each case, choose the punishment. You may only decide once.</p>
+    <p>Your judgment will be compared to both Hammurabi's Code and modern Canadian law.</p>
+    <button onclick="startGame()">Begin Judging</button>
+</div>
+
+<div id="gameScreen" class="hidden">
+    <h2 id="caseTitle"></h2>
+    <canvas id="visual" width="600" height="300"></canvas>
+    <p id="caseText"></p>
+    <div id="choices"></div>
+    <div id="feedback"></div>
+    <button id="nextBtn" onclick="nextCase()" class="hidden">Next Case</button>
+    <button id="restartBtn" onclick="restartGame()" class="hidden">Play Again</button>
+</div>
+
+</div>
+
+<audio id="correctSound" src="https://cdn.pixabay.com/audio/2022/03/15/audio_8c97a4c6c4.mp3"></audio>
+<audio id="wrongSound" src="https://cdn.pixabay.com/audio/2022/03/15/audio_2b32e3e0d6.mp3"></audio>
 
 <script>
+
+let currentCase = 0;
+
 const cases = [
 {
-title: "The Injured Eye",
-visual: "👁️⚔️",
-text: "A man destroys the eye of another man during a fight.",
-hammurabi: "Law #196: 'An eye for an eye.'",
-canada: "In Canada, this would likely result in assault charges under the Criminal Code, potentially imprisonment or fines depending on severity.",
-correct: "eye",
-options: [
-{text:"Warning", value:"warn", harsh:0},
-{text:"Fine", value:"fine", harsh:1},
-{text:"Imprison", value:"jail", harsh:1},
-{text:"Public Shaming", value:"shame", harsh:1},
-{text:"Destroy His Eye", value:"eye", harsh:2}
-]
+title: "Case 1: The Collapsing House",
+text: "A builder constructs a house. The house collapses and kills the owner.",
+correct: 2,
+law: "Hammurabi Law 229: If a builder builds a house and it collapses and kills the owner, the builder shall be put to death.",
+canada: "In Canada, this would result in criminal negligence charges and possibly prison time, not execution."
 },
 {
-title: "The Collapsed House",
-visual: "🏠💥",
-text: "A builder constructs a house. It collapses and kills the owner.",
-hammurabi: "Law #229: 'The builder shall be put to death.'",
-canada: "In Canada, this could result in criminal negligence causing death, investigated before any punishment is determined.",
-correct: "death",
-options: [
-{text:"Warning", value:"warn", harsh:0},
-{text:"Fine", value:"fine", harsh:1},
-{text:"Imprison", value:"jail", harsh:1},
-{text:"Compensation Only", value:"comp", harsh:1},
-{text:"Execute Builder", value:"death", harsh:2}
-]
+title: "Case 2: The False Accuser",
+text: "A man accuses another of murder but cannot prove it.",
+correct: 1,
+law: "Hammurabi Law 3: If a man brings an accusation and cannot prove it, he shall be put to death.",
+canada: "In Canada, false accusations may result in fines or jail for perjury, not death."
 },
 {
-title: "The Stolen Ox",
-visual: "🐂💰",
+title: "Case 3: The Stolen Ox",
 text: "A man steals an ox from another citizen.",
-hammurabi: "Law #8: 'He shall repay thirtyfold.'",
-canada: "In Canada, theft under the Criminal Code may result in fines, restitution, probation, or imprisonment depending on value.",
-correct: "repay",
-options: [
-{text:"Warning", value:"warn", harsh:0},
-{text:"Repay Once", value:"small", harsh:1},
-{text:"Fine Only", value:"fine", harsh:1},
-{text:"Imprison", value:"jail", harsh:1},
-{text:"Repay Thirtyfold", value:"repay", harsh:2}
-]
+correct: 3,
+law: "Hammurabi Law 8: If anyone steals livestock, he shall repay thirtyfold.",
+canada: "In Canada, theft results in fines, restitution, or jail time."
+},
+{
+title: "Case 4: Striking a Father",
+text: "A son strikes his father during an argument.",
+correct: 0,
+law: "Hammurabi Law 195: If a son strikes his father, his hands shall be cut off.",
+canada: "In Canada, assault laws apply equally and punishment involves fines or imprisonment."
+},
+{
+title: "Case 5: Eye for an Eye",
+text: "A man destroys another man's eye in a fight.",
+correct: 4,
+law: "Hammurabi Law 196: If a man destroys the eye of another man, they shall destroy his eye.",
+canada: "In Canada, assault causing bodily harm leads to prison, not physical retaliation."
 }
 ];
 
-let currentCase = 0;
-let harshnessScore = 0;
+const options = [
+["Fine him", "Exile him", "Execute the builder", "Make him rebuild", "No punishment"],
+["Ignore the case", "Execute the accuser", "Fine both", "Public apology", "Whip him"],
+["Cut off his hand", "Exile him", "No punishment", "Repay thirtyfold", "Public shame"],
+["Cut off his hands", "Fine him", "Exile him", "Public apology", "No punishment"],
+["Fine him", "Exile him", "Prison", "Public apology", "Destroy his eye"]
+];
 
-function playSound(type) {
-    const ctx = new (window.AudioContext || window.webkitAudioContext)();
-    const osc = ctx.createOscillator();
-    osc.frequency.value = type === "correct" ? 600 : 200;
-    osc.connect(ctx.destination);
-    osc.start();
-    setTimeout(()=>osc.stop(),200);
-}
-
-function startScreen() {
-    document.getElementById("app").innerHTML = `
-        <div class="screen">
-            <h1>⚖ Justice Simulator 1754 BCE ⚖</h1>
-            <p>You are about to play as a Babylonian judge.</p>
-            <p>You must decide the punishment for each case presented.</p>
-            <p>Your choices will reveal how justice was carved into law.</p>
-            <button onclick="loadCase()">Begin Judgment</button>
-        </div>
-    `;
+function startGame() {
+    document.getElementById("startScreen").classList.add("hidden");
+    document.getElementById("gameScreen").classList.remove("hidden");
+    loadCase();
 }
 
 function loadCase() {
-    if (currentCase >= cases.length) {
-        return finalScreen();
-    }
+    let c = cases[currentCase];
+    document.getElementById("caseTitle").innerText = c.title;
+    document.getElementById("caseText").innerText = c.text;
+    document.getElementById("feedback").innerHTML = "";
+    document.getElementById("nextBtn").classList.add("hidden");
 
-    const c = cases[currentCase];
+    drawVisual(currentCase);
 
-    document.getElementById("app").innerHTML = `
-        <div class="screen">
-        <div id="harshness-bar"><div id="harshness-fill"></div></div>
-        <div class="case-box">
-            <h2>${c.title}</h2>
-            <div class="visual">${c.visual}</div>
-            <p>${c.text}</p>
-            <div id="options"></div>
-            <div id="result"></div>
-        </div>
-        </div>
-    `;
+    let choicesDiv = document.getElementById("choices");
+    choicesDiv.innerHTML = "";
 
-    updateBar();
-
-    const optionsDiv = document.getElementById("options");
-    c.options.forEach(option => {
-        const btn = document.createElement("button");
-        btn.innerText = option.text;
-        btn.onclick = () => choose(option.value, option.harsh);
-        optionsDiv.appendChild(btn);
+    options[currentCase].forEach((opt, index) => {
+        let btn = document.createElement("button");
+        btn.innerText = opt;
+        btn.onclick = () => chooseAnswer(index, btn);
+        choicesDiv.appendChild(btn);
     });
 }
 
-function choose(choice, harshValue) {
-    const buttons = document.querySelectorAll("button");
-    buttons.forEach(btn => btn.disabled = true);
+function chooseAnswer(index, btn) {
+    let buttons = document.querySelectorAll("#choices button");
+    buttons.forEach(b => b.disabled = true);
 
-    const c = cases[currentCase];
-    harshnessScore += harshValue;
-    updateBar();
-
-    const resultDiv = document.getElementById("result");
-
-    if (choice === c.correct) {
-        playSound("correct");
+    if(index === cases[currentCase].correct){
+        document.getElementById("feedback").innerHTML =
+        "<b>Correct according to Hammurabi.</b><br><br>" +
+        cases[currentCase].law +
+        "<br><br><b>Canadian Law:</b><br>" +
+        cases[currentCase].canada;
+        document.getElementById("correctSound").play();
     } else {
-        playSound("wrong");
+        document.getElementById("feedback").innerHTML =
+        "<b>Incorrect.</b><br><br>" +
+        cases[currentCase].law +
+        "<br><br><b>Canadian Law:</b><br>" +
+        cases[currentCase].canada;
+        document.getElementById("wrongSound").play();
     }
 
-    resultDiv.innerHTML = `
-        <hr>
-        <strong>Hammurabi's Law:</strong><br>${c.hammurabi}<br><br>
-        <strong>Modern Canadian Law:</strong><br>${c.canada}<br><br>
-        <button onclick="nextCase()">Next Case</button>
-    `;
+    if(currentCase < cases.length - 1){
+        document.getElementById("nextBtn").classList.remove("hidden");
+    } else {
+        document.getElementById("restartBtn").classList.remove("hidden");
+    }
 }
 
-function nextCase() {
+function nextCase(){
     currentCase++;
     loadCase();
 }
 
-function updateBar() {
-    const percent = (harshnessScore / (cases.length * 2)) * 100;
-    const fill = document.getElementById("harshness-fill");
-    if (fill) fill.style.width = percent + "%";
-}
-
-function finalScreen() {
-    let message;
-    if (harshnessScore >= 5) {
-        message = "You ruled with strict retaliation.";
-    } else {
-        message = "You ruled with moderation compared to ancient standards.";
-    }
-
-    document.getElementById("app").innerHTML = `
-        <div class="screen">
-            <h1>Final Judgment</h1>
-            <p>${message}</p>
-            <p>Total Harshness Score: ${harshnessScore}</p>
-            <p>The Code of Hammurabi focused on deterrence and strict order. Modern Canadian law emphasizes investigation, rights, and proportional punishment.</p>
-            <button onclick="restart()">Carve New Judgments</button>
-        </div>
-    `;
-}
-
-function restart() {
+function restartGame(){
     currentCase = 0;
-    harshnessScore = 0;
-    startScreen();
+    document.getElementById("restartBtn").classList.add("hidden");
+    loadCase();
 }
 
-startScreen();
+function drawVisual(caseNum){
+    let canvas = document.getElementById("visual");
+    let ctx = canvas.getContext("2d");
+    ctx.clearRect(0,0,600,300);
+
+    ctx.fillStyle = "#8b5a2b";
+    ctx.fillRect(0,200,600,100);
+
+    ctx.fillStyle = "#000";
+
+    if(caseNum === 0){
+        ctx.fillRect(200,120,200,80);
+        ctx.fillRect(250,80,100,40);
+        ctx.fillStyle = "red";
+        ctx.fillRect(290,160,20,40);
+    }
+    if(caseNum === 1){
+        ctx.beginPath();
+        ctx.arc(300,150,40,0,Math.PI*2);
+        ctx.stroke();
+        ctx.fillText("⚖",290,160);
+    }
+    if(caseNum === 2){
+        ctx.fillRect(250,140,100,40);
+        ctx.fillText("OX",285,165);
+    }
+    if(caseNum === 3){
+        ctx.fillRect(270,120,60,60);
+        ctx.fillText("FATHER",255,200);
+    }
+    if(caseNum === 4){
+        ctx.beginPath();
+        ctx.arc(300,150,30,0,Math.PI*2);
+        ctx.stroke();
+    }
+}
+
 </script>
 
 </body>
