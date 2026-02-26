@@ -206,35 +206,136 @@ function drawVisual(caseNum){
     let ctx = canvas.getContext("2d");
     ctx.clearRect(0,0,600,300);
 
+    // Background sand ground
+    ctx.fillStyle = "#d2b48c";
+    ctx.fillRect(0,0,600,300);
+
     ctx.fillStyle = "#8b5a2b";
-    ctx.fillRect(0,200,600,100);
+    ctx.fillRect(0,220,600,80);
 
     ctx.fillStyle = "#000";
+    ctx.lineWidth = 3;
 
+    // CASE 1 — HOUSE COLLAPSE ANIMATION
     if(caseNum === 0){
-        ctx.fillRect(200,120,200,80);
-        ctx.fillRect(250,80,100,40);
-        ctx.fillStyle = "red";
-        ctx.fillRect(290,160,20,40);
+        let collapse = false;
+
+        function drawHouse(offset){
+            ctx.fillStyle = "#654321";
+            ctx.fillRect(200,120 + offset,200,100);
+            ctx.fillRect(250,80 + offset,100,40);
+        }
+
+        drawHouse(0);
+
+        setTimeout(() => {
+            ctx.clearRect(0,0,600,300);
+            ctx.fillStyle = "#d2b48c";
+            ctx.fillRect(0,0,600,300);
+            ctx.fillStyle = "#8b5a2b";
+            ctx.fillRect(0,220,600,80);
+
+            // rubble
+            ctx.fillStyle = "#654321";
+            for(let i=0;i<8;i++){
+                ctx.fillRect(200 + i*25, 180 + Math.random()*20, 20, 20);
+            }
+
+            ctx.fillStyle = "red";
+            ctx.font = "18px Papyrus";
+            ctx.fillText("The house has collapsed!", 200, 60);
+        }, 1000);
     }
+
+    // CASE 2 — FALSE ACCUSER
     if(caseNum === 1){
+        // Two people
         ctx.beginPath();
-        ctx.arc(300,150,40,0,Math.PI*2);
+        ctx.arc(200,150,30,0,Math.PI*2);
         ctx.stroke();
-        ctx.fillText("⚖",290,160);
+        ctx.fillText("Accuser",165,200);
+
+        ctx.beginPath();
+        ctx.arc(400,150,30,0,Math.PI*2);
+        ctx.stroke();
+        ctx.fillText("Accused",370,200);
+
+        // pointing line
+        ctx.beginPath();
+        ctx.moveTo(230,150);
+        ctx.lineTo(370,150);
+        ctx.stroke();
+
+        ctx.font = "22px Papyrus";
+        ctx.fillText("⚖",290,80);
     }
+
+    // CASE 3 — STOLEN OX (CLEAR OX SHAPE)
     if(caseNum === 2){
-        ctx.fillRect(250,140,100,40);
-        ctx.fillText("OX",285,165);
+        ctx.fillStyle = "#5c4033";
+        ctx.fillRect(220,150,160,60); // body
+        ctx.fillRect(360,160,40,40);  // head
+        ctx.fillRect(250,210,20,40);  // legs
+        ctx.fillRect(300,210,20,40);
+        ctx.fillRect(340,210,20,40);
+
+        // horns
+        ctx.beginPath();
+        ctx.moveTo(360,160);
+        ctx.lineTo(350,140);
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.moveTo(400,160);
+        ctx.lineTo(410,140);
+        ctx.stroke();
+
+        ctx.fillStyle = "#000";
+        ctx.fillText("OX",285,145);
+
+        ctx.fillStyle = "red";
+        ctx.fillText("STOLEN",260,80);
     }
+
+    // CASE 4 — STRIKING FATHER
     if(caseNum === 3){
-        ctx.fillRect(270,120,60,60);
-        ctx.fillText("FATHER",255,200);
+        // father
+        ctx.beginPath();
+        ctx.arc(250,150,30,0,Math.PI*2);
+        ctx.stroke();
+        ctx.fillText("Father",220,200);
+
+        // son
+        ctx.beginPath();
+        ctx.arc(350,150,30,0,Math.PI*2);
+        ctx.stroke();
+        ctx.fillText("Son",330,200);
+
+        // action line (non-graphic)
+        ctx.beginPath();
+        ctx.moveTo(320,150);
+        ctx.lineTo(280,150);
+        ctx.stroke();
+
+        ctx.fillStyle = "red";
+        ctx.fillText("Strike",280,120);
     }
+
+    // CASE 5 — EYE FOR AN EYE (SYMBOLIC)
     if(caseNum === 4){
         ctx.beginPath();
-        ctx.arc(300,150,30,0,Math.PI*2);
+        ctx.arc(250,150,40,0,Math.PI*2);
         ctx.stroke();
+        ctx.beginPath();
+        ctx.arc(350,150,40,0,Math.PI*2);
+        ctx.stroke();
+
+        ctx.fillStyle = "#000";
+        ctx.fillText("Eye",230,210);
+        ctx.fillText("Eye",330,210);
+
+        ctx.font = "26px Papyrus";
+        ctx.fillText("⚖ Equal Justice ⚖",200,80);
     }
 }
 
