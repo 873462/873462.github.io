@@ -79,7 +79,6 @@ button:disabled {
     <div id="choices"></div>
     <div id="feedback"></div>
     <button id="nextBtn" onclick="nextCase()" class="hidden">Next Case</button>
-    <button id="endBtn" onclick="showEndScreen()" class="hidden">Continue</button>
 </div>
 
 <div id="endScreen" class="hidden">
@@ -149,7 +148,6 @@ function startGame() {
     document.getElementById("gameScreen").classList.remove("hidden");
     score = 0;
     currentCase = 0;
-    document.getElementById("endBtn").classList.add("hidden");
     loadCase();
 }
 
@@ -159,7 +157,6 @@ function loadCase() {
     document.getElementById("caseText").innerText = c.text;
     document.getElementById("feedback").innerHTML = "";
     document.getElementById("nextBtn").classList.add("hidden");
-    document.getElementById("endBtn").classList.add("hidden");
 
     drawVisual(currentCase);
 
@@ -199,10 +196,8 @@ function chooseAnswer(index, btn) {
     if(currentCase < cases.length - 1){
         document.getElementById("nextBtn").classList.remove("hidden");
     } else {
-        // Last case – show the Continue button after animation
-        setTimeout(() => {
-            document.getElementById("endBtn").classList.remove("hidden");
-        }, 1200); // matches animation length
+        // Last case – show final animation first with longer delay (2s)
+        setTimeout(() => showEndScreen(), 2000);
     }
 }
 
@@ -224,7 +219,6 @@ function restartGame(){
 
     document.getElementById("endScreen").classList.add("hidden");
     document.getElementById("gameScreen").classList.remove("hidden");
-    document.getElementById("endBtn").classList.add("hidden");
 
     loadCase();
 }
@@ -288,16 +282,38 @@ function drawVisual(caseNum, outcome=false){
         ctx.fillText(label,x-25,y+headSize+bodyHeight+50);
     }
 
-    // CASES
+    // ========== CASES ==========
+
     if(caseNum===0){
         if(!outcome){
             ctx.fillStyle="#654321";
             ctx.fillRect(200,120,200,100);
             ctx.fillRect(250,80,100,40);
+
+            setTimeout(()=>{
+                ctx.clearRect(0,0,600,300);
+                ctx.fillStyle="#d2b48c";
+                ctx.fillRect(0,0,600,300);
+                ctx.fillStyle="#8b5a2b";
+                ctx.fillRect(0,220,600,80);
+                for(let i=0;i<12;i++){
+                    ctx.fillRect(210+i*20,170+Math.random()*30,20,20);
+                }
+                ctx.fillText("HOUSE COLLAPSED",210,60);
+            },1000);
         } else {
             person(300,120,"Builder",false,false,true);
             ctx.fillStyle="red";
             ctx.fillText("EXECUTED",250,70);
+
+            setTimeout(()=>{
+                ctx.clearRect(0,0,600,300);
+                ctx.fillStyle="#d2b48c";
+                ctx.fillRect(0,0,600,300);
+                ctx.fillStyle="#8b5a2b";
+                ctx.fillRect(0,220,600,80);
+                ctx.fillText("Builder is no more.",230,120);
+            },1200);
         }
     }
 
@@ -309,10 +325,20 @@ function drawVisual(caseNum, outcome=false){
             ctx.moveTo(220,160);
             ctx.lineTo(350,160);
             ctx.stroke();
+            ctx.fillText("NO PROOF!",230,80);
         } else {
             person(300,120,"False Accuser");
             ctx.fillStyle="red";
             ctx.fillText("EXECUTED",250,70);
+
+            setTimeout(()=>{
+                ctx.clearRect(0,0,600,300);
+                ctx.fillStyle="#d2b48c";
+                ctx.fillRect(0,0,600,300);
+                ctx.fillStyle="#8b5a2b";
+                ctx.fillRect(0,220,600,80);
+                ctx.fillText("False Accuser is gone.",210,120);
+            },1200);
         }
     }
 
@@ -320,8 +346,23 @@ function drawVisual(caseNum, outcome=false){
         if(!outcome){
             person(120,120,"Owner");
             person(480,120,"Thief");
+            ctx.fillStyle="#5c4033";
+            ctx.fillRect(250,150,120,60);
+            ctx.fillRect(370,160,40,40);
+            ctx.fillStyle="yellow";
+            ctx.fillRect(290,170,25,15);
+            ctx.fillStyle="#000";
+            ctx.fillText("A",297,182);
+            ctx.beginPath();
+            ctx.moveTo(320,170);
+            ctx.lineTo(440,170);
+            ctx.stroke();
         } else {
             person(120,120,"Owner");
+            for(let i=0;i<30;i++){
+                ctx.fillRect(200+(i%10)*30,150+Math.floor(i/10)*25,20,15);
+            }
+            ctx.fillText("30x REPAYMENT",220,80);
         }
     }
 
@@ -329,9 +370,22 @@ function drawVisual(caseNum, outcome=false){
         if(!outcome){
             person(250,120,"Father");
             person(350,120,"Son",true);
+            ctx.beginPath();
+            ctx.moveTo(350-20, 120+15+15);
+            ctx.lineTo(250+10, 120+25+15);
+            ctx.stroke();
+            ctx.fillText("SON STRIKES FATHER",190,80);
         } else {
             person(250,120,"Father");
             person(350,120,"Son",true,false,false,true);
+            setTimeout(()=>{
+                ctx.clearRect(0,0,600,300);
+                ctx.fillStyle="#d2b48c";
+                ctx.fillRect(0,0,600,300);
+                ctx.fillStyle="#8b5a2b";
+                ctx.fillRect(0,220,600,80);
+                ctx.fillText("Son's hands are removed.",200,120);
+            },1200);
         }
     }
 
@@ -343,6 +397,17 @@ function drawVisual(caseNum, outcome=false){
             ctx.moveTo(270,160);
             ctx.lineTo(330,160);
             ctx.stroke();
+
+            setTimeout(()=>{
+                ctx.clearRect(0,0,600,300);
+                ctx.fillStyle="#d2b48c";
+                ctx.fillRect(0,0,600,300);
+                ctx.fillStyle="#8b5a2b";
+                ctx.fillRect(0,220,600,80);
+                person(250,120,"Person A");
+                person(350,120,"Person B",false,true);
+                ctx.fillText("EQUAL JUSTICE",240,70);
+            },800);
         } else {
             person(250,120,"Person A",false,true);
             person(350,120,"Person B",false,true);
