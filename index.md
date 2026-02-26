@@ -10,7 +10,9 @@ Hi, I’m **Ivan Johnson**
 This is my personal website.  
 
 ##  Quick Links
-- [About Me](about.md)  
+- [About Me](about.md)
+- [Justice Game](justice.md)  
+
 
 ---
 
