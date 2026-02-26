@@ -7,25 +7,21 @@
 <style>
 body {
     margin: 0;
-    font-family: 'Georgia', serif;
+    font-family: Georgia, serif;
     background: radial-gradient(circle at center, #3b2a16, #1a1208);
     color: #e8d8b0;
     text-align: center;
 }
 
-header {
-    padding: 25px;
-    border-bottom: 3px solid #a67c00;
-}
-
 h1 {
     font-size: 42px;
     color: gold;
-    text-shadow: 2px 2px 5px black;
+    text-shadow: 2px 2px 8px black;
 }
 
-#game-container {
-    padding: 30px;
+.screen {
+    padding: 40px;
+    animation: fadeIn 0.8s ease-in-out;
 }
 
 .case-box {
@@ -33,47 +29,36 @@ h1 {
     border: 3px solid #a67c00;
     border-radius: 15px;
     padding: 30px;
-    max-width: 750px;
+    max-width: 800px;
     margin: auto;
     box-shadow: 0 0 25px black;
-    animation: fadeIn 0.8s ease-in-out;
 }
 
 button {
     background: linear-gradient(145deg, #c9a227, #a67c00);
     border: none;
     padding: 12px 20px;
-    margin: 10px;
+    margin: 8px;
     font-size: 15px;
     cursor: pointer;
     border-radius: 6px;
     font-weight: bold;
-    transition: transform 0.1s, background 0.3s;
+    transition: 0.2s;
 }
 
-button:hover {
-    background: #ffd700;
-    transform: scale(1.05);
+button:hover { transform: scale(1.05); }
+button:disabled {
+    background: #555;
+    cursor: not-allowed;
 }
 
-button:active {
-    transform: scale(0.95);
-}
-
-#result {
-    margin-top: 20px;
-    font-size: 18px;
-    min-height: 60px;
-}
-
-#progress {
-    margin-top: 10px;
-    font-size: 14px;
-    color: #c9a227;
+.visual {
+    font-size: 60px;
+    margin: 15px 0;
 }
 
 #harshness-bar {
-    width: 80%;
+    width: 70%;
     height: 20px;
     background-color: #333;
     margin: 15px auto;
@@ -89,89 +74,61 @@ button:active {
 }
 
 @keyframes fadeIn {
-    from {opacity: 0; transform: translateY(10px);}
-    to {opacity: 1; transform: translateY(0);}
-}
-
-footer {
-    margin-top: 30px;
-    padding: 15px;
-    border-top: 3px solid #a67c00;
-    font-size: 13px;
+    from {opacity: 0;}
+    to {opacity: 1;}
 }
 </style>
 </head>
 
 <body>
 
-<header>
-<h1>⚖ Justice Simulator 1754 BCE ⚖</h1>
-<p>You are a Babylonian judge. Carve justice into stone.</p>
-<div id="progress"></div>
-<div id="harshness-bar"><div id="harshness-fill"></div></div>
-</header>
-
-<div id="game-container"></div>
-
-<footer>
-Based on the Code of Hammurabi (c. 1754 BCE)
-</footer>
+<div id="app"></div>
 
 <script>
 const cases = [
 {
-title: "Case 1: The Injured Eye",
+title: "The Injured Eye",
+visual: "👁️⚔️",
 text: "A man destroys the eye of another man during a fight.",
-law: "Law #196: 'If a man destroy the eye of another man, they shall destroy his eye.'",
+hammurabi: "Law #196: 'An eye for an eye.'",
+canada: "In Canada, this would likely result in assault charges under the Criminal Code, potentially imprisonment or fines depending on severity.",
 correct: "eye",
 options: [
-{text:"Fine Him", value:"fine", harsh:0},
-{text:"Imprison Him", value:"jail", harsh:1},
+{text:"Warning", value:"warn", harsh:0},
+{text:"Fine", value:"fine", harsh:1},
+{text:"Imprison", value:"jail", harsh:1},
+{text:"Public Shaming", value:"shame", harsh:1},
 {text:"Destroy His Eye", value:"eye", harsh:2}
 ]
 },
 {
-title: "Case 2: The Collapsed House",
+title: "The Collapsed House",
+visual: "🏠💥",
 text: "A builder constructs a house. It collapses and kills the owner.",
-law: "Law #229: 'The builder shall be put to death.'",
+hammurabi: "Law #229: 'The builder shall be put to death.'",
+canada: "In Canada, this could result in criminal negligence causing death, investigated before any punishment is determined.",
 correct: "death",
 options: [
-{text:"Compensation", value:"fine", harsh:0},
-{text:"Imprison Builder", value:"jail", harsh:1},
+{text:"Warning", value:"warn", harsh:0},
+{text:"Fine", value:"fine", harsh:1},
+{text:"Imprison", value:"jail", harsh:1},
+{text:"Compensation Only", value:"comp", harsh:1},
 {text:"Execute Builder", value:"death", harsh:2}
 ]
 },
 {
-title: "Case 3: The Stolen Ox",
+title: "The Stolen Ox",
+visual: "🐂💰",
 text: "A man steals an ox from another citizen.",
-law: "Law #8: 'He shall repay thirtyfold.'",
+hammurabi: "Law #8: 'He shall repay thirtyfold.'",
+canada: "In Canada, theft under the Criminal Code may result in fines, restitution, probation, or imprisonment depending on value.",
 correct: "repay",
 options: [
 {text:"Warning", value:"warn", harsh:0},
 {text:"Repay Once", value:"small", harsh:1},
+{text:"Fine Only", value:"fine", harsh:1},
+{text:"Imprison", value:"jail", harsh:1},
 {text:"Repay Thirtyfold", value:"repay", harsh:2}
-]
-},
-{
-title: "Case 4: False Accusation",
-text: "A man accuses another of murder but cannot prove it.",
-law: "Law #3: 'The accuser shall be put to death.'",
-correct: "death",
-options: [
-{text:"Dismiss Case", value:"dismiss", harsh:0},
-{text:"Fine Accuser", value:"fine", harsh:1},
-{text:"Execute Accuser", value:"death", harsh:2}
-]
-},
-{
-title: "Case 5: Striking a Father",
-text: "A son strikes his father during an argument.",
-law: "Law #195: 'His hands shall be cut off.'",
-correct: "hands",
-options: [
-{text:"Warning", value:"warn", harsh:0},
-{text:"Imprisonment", value:"jail", harsh:1},
-{text:"Cut Off Hands", value:"hands", harsh:2}
 ]
 }
 ];
@@ -180,38 +137,47 @@ let currentCase = 0;
 let harshnessScore = 0;
 
 function playSound(type) {
-    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-    const oscillator = audioCtx.createOscillator();
-    oscillator.type = "sine";
-    oscillator.frequency.value = type === "correct" ? 600 : 200;
-    oscillator.connect(audioCtx.destination);
-    oscillator.start();
-    setTimeout(() => oscillator.stop(), 200);
+    const ctx = new (window.AudioContext || window.webkitAudioContext)();
+    const osc = ctx.createOscillator();
+    osc.frequency.value = type === "correct" ? 600 : 200;
+    osc.connect(ctx.destination);
+    osc.start();
+    setTimeout(()=>osc.stop(),200);
 }
 
-function updateHarshnessBar() {
-    const percentage = (harshnessScore / (cases.length * 2)) * 100;
-    document.getElementById("harshness-fill").style.width = percentage + "%";
+function startScreen() {
+    document.getElementById("app").innerHTML = `
+        <div class="screen">
+            <h1>⚖ Justice Simulator 1754 BCE ⚖</h1>
+            <p>You are about to play as a Babylonian judge.</p>
+            <p>You must decide the punishment for each case presented.</p>
+            <p>Your choices will reveal how justice was carved into law.</p>
+            <button onclick="loadCase()">Begin Judgment</button>
+        </div>
+    `;
 }
 
 function loadCase() {
     if (currentCase >= cases.length) {
-        showFinalScreen();
-        return;
+        return finalScreen();
     }
 
     const c = cases[currentCase];
-    document.getElementById("progress").innerText = 
-        `Case ${currentCase + 1} of ${cases.length}`;
 
-    document.getElementById("game-container").innerHTML = `
+    document.getElementById("app").innerHTML = `
+        <div class="screen">
+        <div id="harshness-bar"><div id="harshness-fill"></div></div>
         <div class="case-box">
             <h2>${c.title}</h2>
+            <div class="visual">${c.visual}</div>
             <p>${c.text}</p>
             <div id="options"></div>
             <div id="result"></div>
         </div>
+        </div>
     `;
+
+    updateBar();
 
     const optionsDiv = document.getElementById("options");
     c.options.forEach(option => {
@@ -223,52 +189,66 @@ function loadCase() {
 }
 
 function choose(choice, harshValue) {
-    const resultDiv = document.getElementById("result");
-    const correctAnswer = cases[currentCase].correct;
-    harshnessScore += harshValue;
-    updateHarshnessBar();
+    const buttons = document.querySelectorAll("button");
+    buttons.forEach(btn => btn.disabled = true);
 
-    if (choice === correctAnswer) {
+    const c = cases[currentCase];
+    harshnessScore += harshValue;
+    updateBar();
+
+    const resultDiv = document.getElementById("result");
+
+    if (choice === c.correct) {
         playSound("correct");
-        resultDiv.innerHTML = "✔ This matches Hammurabi's law.<br><br>" + cases[currentCase].law;
     } else {
         playSound("wrong");
-        resultDiv.innerHTML = "✖ In Babylon, this would be incorrect.<br><br>" + cases[currentCase].law;
     }
 
-    const nextBtn = document.createElement("button");
-    nextBtn.innerText = "Carve Next Judgment";
-    nextBtn.onclick = () => {
-        currentCase++;
-        loadCase();
-    };
-
-    resultDiv.appendChild(document.createElement("br"));
-    resultDiv.appendChild(nextBtn);
+    resultDiv.innerHTML = `
+        <hr>
+        <strong>Hammurabi's Law:</strong><br>${c.hammurabi}<br><br>
+        <strong>Modern Canadian Law:</strong><br>${c.canada}<br><br>
+        <button onclick="nextCase()">Next Case</button>
+    `;
 }
 
-function showFinalScreen() {
-    let judgment;
+function nextCase() {
+    currentCase++;
+    loadCase();
+}
 
-    if (harshnessScore >= 7) {
-        judgment = "You ruled with fear and absolute retaliation.";
-    } else if (harshnessScore >= 4) {
-        judgment = "You balanced authority and restraint.";
+function updateBar() {
+    const percent = (harshnessScore / (cases.length * 2)) * 100;
+    const fill = document.getElementById("harshness-fill");
+    if (fill) fill.style.width = percent + "%";
+}
+
+function finalScreen() {
+    let message;
+    if (harshnessScore >= 5) {
+        message = "You ruled with strict retaliation.";
     } else {
-        judgment = "You showed mercy beyond ancient standards.";
+        message = "You ruled with moderation compared to ancient standards.";
     }
 
-    document.getElementById("game-container").innerHTML = `
-        <div class="case-box">
-            <h2>Final Judgment</h2>
-            <p>${judgment}</p>
-            <p>Your Harshness Score: ${harshnessScore}</p>
-            <p>The Code of Hammurabi emphasized strict punishment, social order, and deterrence. Modern legal systems focus more on intent, investigation, and proportionality.</p>
+    document.getElementById("app").innerHTML = `
+        <div class="screen">
+            <h1>Final Judgment</h1>
+            <p>${message}</p>
+            <p>Total Harshness Score: ${harshnessScore}</p>
+            <p>The Code of Hammurabi focused on deterrence and strict order. Modern Canadian law emphasizes investigation, rights, and proportional punishment.</p>
+            <button onclick="restart()">Carve New Judgments</button>
         </div>
     `;
 }
 
-loadCase();
+function restart() {
+    currentCase = 0;
+    harshnessScore = 0;
+    startScreen();
+}
+
+startScreen();
 </script>
 
 </body>
