@@ -196,8 +196,11 @@ function chooseAnswer(index, btn) {
     if(currentCase < cases.length - 1){
         document.getElementById("nextBtn").classList.remove("hidden");
     } else {
-        // Last case – show final animation first with longer delay (2s)
-        setTimeout(() => showEndScreen(), 2000);
+        // Last case – show button instead of auto-transition
+        let nextBtn = document.getElementById("nextBtn");
+        nextBtn.innerText = "View Final Judgment";
+        nextBtn.onclick = showEndScreen;
+        nextBtn.classList.remove("hidden");
     }
 }
 
