@@ -11,7 +11,7 @@ This is my personal website.
 
 ##  Quick Links
 - [About Me](about.md)
-- [Justice Game](justice.md)  
+- [Justice Game](justice.html)  
 
 
 ---
