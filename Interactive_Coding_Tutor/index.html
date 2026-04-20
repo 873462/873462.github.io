@@ -35,8 +35,9 @@
 
     #lesson {
       color: #38bdf8;
-      margin-bottom: 10px;
+      margin-bottom: 15px;
       white-space: pre-line;
+      font-size: 17px;
     }
 
     #score { color: #facc15; }
@@ -82,41 +83,47 @@ let current = -1;
 let score = 0;
 let currentSet = [];
 
-// ===== LESSON CONTENT =====
+// ===== CONTENT (NOW WITH FULL TEACHING) =====
 const content = {
 
 java: {
 learn: [
+
 {
-lesson: "📘 Data Types & Variables\nJava uses types.\nint = whole number\ndouble = decimal\nString = text",
-q: "Create an int variable x = 5",
+lesson: "📘 VARIABLES\nA variable stores data.\nIn Java, you must declare the type.\nExample:\nint x = 5;",
+q: "Create a variable x equal to 5",
 a: "int x = 5;",
 h: "Use int and ;"
 },
+
 {
-lesson: "📘 Variables Continued\nStrings store text using quotes.",
+lesson: "📘 ADDITION (+)\nThe + operator adds numbers together.\nExample:\nint x = 5 + 3; // x becomes 8",
+q: "Add two numbers so that x equals 11",
+a: "int x = 5 + 6;",
+h: "Use + to add numbers"
+},
+
+{
+lesson: "📘 STRINGS\nStrings store text using quotes.\nExample:\nString name = \"Bob\";",
 q: "Create a String name = \"Bob\"",
 a: "String name = \"Bob\";",
-h: "Use String and quotes"
+h: "Use quotes and String"
 },
+
 {
-lesson: "📘 Operators\nOperators perform math.\n+ - * /",
-q: "Create int z = 5 + 3",
-a: "int z = 5 + 3;",
-h: "Use + operator"
-},
-{
-lesson: "📘 Control Flow (if)\nUsed for decisions",
+lesson: "📘 IF STATEMENTS\nUsed to make decisions.\nExample:\nif (x > 10) { }",
 q: "Write: if x > 10",
 a: "if (x > 10)",
 h: "Use parentheses"
 },
+
 {
-lesson: "📘 Loops\nRepeat code",
+lesson: "📘 LOOPS\nLoops repeat code.\nExample:\nfor(int i=0;i<5;i++)",
 q: "Write a loop from 0 to 5",
 a: "for(int i=0;i<5;i++)",
 h: "Use i++"
 }
+
 ],
 
 game: [
@@ -128,36 +135,42 @@ game: [
 
 python: {
 learn: [
+
 {
-lesson: "📘 Variables\nPython has no types",
-q: "x = 5",
+lesson: "📘 VARIABLES\nPython does not need types.\nExample:\nx = 5",
+q: "Create x = 5",
 a: "x = 5",
-h: "No int needed"
+h: "No type needed"
 },
+
 {
-lesson: "📘 Strings\nText uses quotes",
+lesson: "📘 ADDITION (+)\nUse + to add numbers.\nExample:\nx = 5 + 3",
+q: "Make x equal 11 using addition",
+a: "x = 5 + 6",
+h: "Use +"
+},
+
+{
+lesson: "📘 STRINGS\nUse quotes for text.",
 q: "name = \"Bob\"",
 a: "name = \"Bob\"",
 h: "Use quotes"
 },
+
 {
-lesson: "📘 Operators\n+ - * /",
-q: "z = 5 + 3",
-a: "z = 5 + 3",
-h: "Use +"
-},
-{
-lesson: "📘 If Statements",
+lesson: "📘 IF STATEMENTS",
 q: "if x > 10:",
 a: "if x > 10:",
 h: "Use :"
 },
+
 {
-lesson: "📘 Loops",
+lesson: "📘 LOOPS",
 q: "for i in range(5):",
 a: "for i in range(5):",
 h: "Use range"
 }
+
 ],
 
 game: [
@@ -169,36 +182,42 @@ game: [
 
 javascript: {
 learn: [
+
 {
-lesson: "📘 Variables\nUse let",
-q: "let x = 5;",
+lesson: "📘 VARIABLES\nUse let to create variables.\nExample:\nlet x = 5;",
+q: "Create x = 5",
 a: "let x = 5",
 h: "Use let"
 },
+
 {
-lesson: "📘 Strings",
-q: "let name = \"Bob\";",
+lesson: "📘 ADDITION (+)\nAdds numbers.\nExample:\nlet x = 5 + 3;",
+q: "Make x equal 11",
+a: "let x = 5 + 6",
+h: "Use +"
+},
+
+{
+lesson: "📘 STRINGS",
+q: "let name = \"Bob\"",
 a: "let name = \"Bob\"",
 h: "Use quotes"
 },
+
 {
-lesson: "📘 Operators",
-q: "let z = 5 + 3;",
-a: "let z = 5 + 3",
-h: "Use +"
-},
-{
-lesson: "📘 If Statements",
+lesson: "📘 IF STATEMENTS",
 q: "if(x > 10)",
 a: "if(x > 10)",
 h: "Use ()"
 },
+
 {
-lesson: "📘 Loops",
+lesson: "📘 LOOPS",
 q: "for(let i=0;i<5;i++)",
 a: "for(let i=0;i<5;i++)",
 h: "Use i++"
 }
+
 ],
 
 game: [
@@ -247,7 +266,9 @@ document.getElementById("lesson").textContent =
 mode === "learn" ? currentSet[current].lesson : "";
 
 document.getElementById("question").textContent =
-mode === "learn" ? "Try this: " + currentSet[current].q : currentSet[current].q;
+mode === "learn"
+? "👉 Now try: " + currentSet[current].q
+: currentSet[current].q;
 
 document.getElementById("code").value = "";
 document.getElementById("result").textContent = "";
