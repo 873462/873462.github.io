@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Code Tutor</title>
+  <style>
+    body {
+      font-family: Arial;
+      background: #0f172a;
+      color: white;
+      text-align: center;
+      padding: 30px;
+    }
+
+    textarea {
+      width: 80%;
+      height: 120px;
+      margin-top: 10px;
+      font-size: 16px;
+    }
+
+    button {
+      padding: 10px 20px;
+      margin: 10px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .card {
+      background: #1e293b;
+      padding: 20px;
+      margin: 20px auto;
+      width: 60%;
+      border-radius: 10px;
+    }
+
+    #result {
+      margin-top: 15px;
+      font-weight: bold;
+    }
+
+    #hint {
+      color: #38bdf8;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>💻 Interactive Coding Tutor</h1>
+
+  <div class="card">
+    <p id="question">Click "Next Question" to begin</p>
+    <textarea id="code" placeholder="Type your code here..."></textarea>
+    <br>
+    <button onclick="checkAnswer()">Check Answer</button>
+    <button onclick="nextQuestion()">Next Question</button>
+
+    <p id="result"></p>
+    <p id="hint"></p>
+  </div>
+
+  <script>
+    const questions = [
+      {
+        q: "Create a variable called x and set it equal to 5",
+        answer: "let x = 5",
+        hint: "Use 'let' to create a variable"
+      },
+      {
+        q: "Create a variable called name and set it equal to 'John'",
+        answer: "let name = 'john'",
+        hint: "Strings need quotes"
+      },
+      {
+        q: "Write a function called greet",
+        answer: "function greet()",
+        hint: "Use the keyword 'function'"
+      },
+      {
+        q: "Write an if statement that checks if x is greater than 10",
+        answer: "if (x > 10)",
+        hint: "Use parentheses ()"
+      }
+    ];
+
+    let current = -1;
+
+    function normalize(text) {
+      return text.toLowerCase().replace(/\s+/g, '');
+    }
+
+    function nextQuestion() {
+      current++;
+      if (current >= questions.length) {
+        document.getElementById("question").textContent = "🎉 You finished!";
+        return;
+      }
+
+      document.getElementById("question").textContent = questions[current].q;
+      document.getElementById("code").value = "";
+      document.getElementById("result").textContent = "";
+      document.getElementById("hint").textContent = "";
+    }
+
+    function checkAnswer() {
+      const userCode = normalize(document.getElementById("code").value);
+      const correct = normalize(questions[current].answer);
+
+      if (userCode.includes(correct)) {
+        document.getElementById("result").textContent = "✅ Correct!";
+        document.getElementById("hint").textContent = "";
+      } else {
+        document.getElementById("result").textContent = "❌ Try again!";
+        document.getElementById("hint").textContent = "Hint: " + questions[current].hint;
+      }
+    }
+  </script>
+
+</body>
+</html>
