@@ -20,7 +20,7 @@
 
     button {
       padding: 10px 20px;
-      margin: 10px;
+      margin: 5px;
       font-size: 16px;
       cursor: pointer;
     }
@@ -33,87 +33,102 @@
       border-radius: 10px;
     }
 
-    #result {
-      margin-top: 15px;
-      font-weight: bold;
-    }
-
-    #hint {
-      color: #38bdf8;
-    }
+    #result { margin-top: 10px; }
+    #hint { color: #38bdf8; }
+    #score { margin-top: 10px; color: #facc15; }
   </style>
 </head>
 <body>
 
-  <h1>💻 Interactive Coding Tutor</h1>
+<h1>💻 Interactive Coding Tutor</h1>
 
-  <div class="card">
-    <p id="question">Click "Next Question" to begin</p>
-    <textarea id="code" placeholder="Type your code here..."></textarea>
-    <br>
-    <button onclick="checkAnswer()">Check Answer</button>
-    <button onclick="nextQuestion()">Next Question</button>
+<div>
+  <button onclick="setDifficulty('easy')">Easy</button>
+  <button onclick="setDifficulty('medium')">Medium</button>
+  <button onclick="setDifficulty('hard')">Hard</button>
+</div>
 
-    <p id="result"></p>
-    <p id="hint"></p>
-  </div>
+<div class="card">
+  <p id="progress"></p>
+  <p id="question">Select a difficulty to start</p>
 
-  <script>
-    const questions = [
-      {
-        q: "Create a variable called x and set it equal to 5",
-        answer: "let x = 5",
-        hint: "Use 'let' to create a variable"
-      },
-      {
-        q: "Create a variable called name and set it equal to 'John'",
-        answer: "let name = 'john'",
-        hint: "Strings need quotes"
-      },
-      {
-        q: "Write a function called greet",
-        answer: "function greet()",
-        hint: "Use the keyword 'function'"
-      },
-      {
-        q: "Write an if statement that checks if x is greater than 10",
-        answer: "if (x > 10)",
-        hint: "Use parentheses ()"
-      }
-    ];
+  <textarea id="code" placeholder="Type your code..."></textarea><br>
 
-    let current = -1;
+  <button onclick="checkAnswer()">Check</button>
+  <button onclick="nextQuestion()">Next</button>
 
-    function normalize(text) {
-      return text.toLowerCase().replace(/\s+/g, '');
-    }
+  <p id="result"></p>
+  <p id="hint"></p>
+  <p id="score"></p>
+</div>
 
-    function nextQuestion() {
-      current++;
-      if (current >= questions.length) {
-        document.getElementById("question").textContent = "🎉 You finished!";
-        return;
-      }
+<script>
+let score = 0;
+let current = -1;
+let currentSet = [];
 
-      document.getElementById("question").textContent = questions[current].q;
-      document.getElementById("code").value = "";
-      document.getElementById("result").textContent = "";
-      document.getElementById("hint").textContent = "";
-    }
+const sets = {
+  easy: [
+    {q:"Create a variable x = 5", a:"let x = 5", h:"Use let"},
+    {q:"Create variable y = 10", a:"let y = 10", h:"Same pattern"}
+  ],
+  medium: [
+    {q:"Write a function called greet", a:"function greet()", h:"Use function"},
+    {q:"If x > 10", a:"if (x > 10)", h:"Use parentheses"}
+  ],
+  hard: [
+    {q:"Write a for loop from 0 to 5", a:"for(let i=0;i<5;i++)", h:"Use i++"},
+    {q:"Console log 'Hello'", a:"console.log('hello')", h:"Use console.log"}
+  ]
+};
 
-    function checkAnswer() {
-      const userCode = normalize(document.getElementById("code").value);
-      const correct = normalize(questions[current].answer);
+function normalize(t){
+  return t.toLowerCase().replace(/\s+/g,'');
+}
 
-      if (userCode.includes(correct)) {
-        document.getElementById("result").textContent = "✅ Correct!";
-        document.getElementById("hint").textContent = "";
-      } else {
-        document.getElementById("result").textContent = "❌ Try again!";
-        document.getElementById("hint").textContent = "Hint: " + questions[current].hint;
-      }
-    }
-  </script>
+function setDifficulty(level){
+  currentSet = sets[level];
+  score = 0;
+  current = -1;
+  nextQuestion();
+}
+
+function nextQuestion(){
+  current++;
+  if(current >= currentSet.length){
+    document.getElementById("question").textContent = "🎉 Finished!";
+    return;
+  }
+
+  document.getElementById("question").textContent = currentSet[current].q;
+  document.getElementById("code").value = "";
+  document.getElementById("result").textContent = "";
+  document.getElementById("hint").textContent = "";
+
+  document.getElementById("progress").textContent =
+    `Question ${current+1} / ${currentSet.length}`;
+
+  document.getElementById("score").textContent =
+    `Score: ${score}`;
+}
+
+function checkAnswer(){
+  const user = normalize(document.getElementById("code").value);
+  const correct = normalize(currentSet[current].a);
+
+  if(user.includes(correct)){
+    document.getElementById("result").textContent = "✅ Correct!";
+    score++;
+  } else {
+    document.getElementById("result").textContent = "❌ Try again!";
+    document.getElementById("hint").textContent =
+      "Hint: " + currentSet[current].h;
+  }
+
+  document.getElementById("score").textContent =
+    `Score: ${score}`;
+}
+</script>
 
 </body>
 </html>
