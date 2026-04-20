@@ -11,7 +11,7 @@
       padding: 30px;
     }
 
-    button, select {
+    button {
       padding: 10px;
       margin: 5px;
       font-size: 16px;
@@ -29,12 +29,16 @@
       background: #1e293b;
       padding: 20px;
       margin: 20px auto;
-      width: 60%;
+      width: 65%;
       border-radius: 10px;
     }
 
-    #result { margin-top: 10px; }
-    #hint { color: #38bdf8; }
+    #lesson {
+      color: #38bdf8;
+      margin-bottom: 10px;
+      white-space: pre-line;
+    }
+
     #score { color: #facc15; }
   </style>
 </head>
@@ -57,9 +61,11 @@
 
 <div id="app" class="card" style="display:none;">
   <p id="progress"></p>
+
+  <p id="lesson"></p>
   <p id="question"></p>
 
-  <textarea id="code" placeholder="Type your code here..."></textarea><br>
+  <textarea id="code"></textarea><br>
 
   <button onclick="checkAnswer()">Check</button>
   <button onclick="nextStep()">Next</button>
@@ -76,146 +82,196 @@ let current = -1;
 let score = 0;
 let currentSet = [];
 
-// ===== CONTENT =====
+// ===== LESSON CONTENT =====
 const content = {
-  java: {
-    learn: [
-      {
-        q: "In Java, we create variables using types. Example:\nint x = 5;\nTry typing that below.",
-        a: "int x = 5;",
-        h: "Use int and ;"
-      },
-      {
-        q: "Java prints using:\nSystem.out.println(\"Hello\");\nTry it.",
-        a: "system.out.println(\"hello\");",
-        h: "Exact spelling matters"
-      }
-    ],
-    game: [
-      {
-        q: "Create an int variable y = 10",
-        a: "int y = 10;",
-        h: "Use int"
-      },
-      {
-        q: "Write a for loop from 0 to 5",
-        a: "for(int i=0;i<5;i++)",
-        h: "Use i++"
-      }
-    ]
-  },
 
-  python: {
-    learn: [
-      {
-        q: "Python variables don’t need types:\nx = 5\nTry it.",
-        a: "x = 5",
-        h: "No int needed"
-      },
-      {
-        q: "Print in Python:\nprint(\"Hello\")",
-        a: "print(\"hello\")",
-        h: "Use print()"
-      }
-    ],
-    game: [
-      {
-        q: "Create variable y = 10",
-        a: "y = 10",
-        h: "Simple assignment"
-      },
-      {
-        q: "Write a loop from 0 to 5",
-        a: "for i in range(5)",
-        h: "Use range()"
-      }
-    ]
-  },
+java: {
+learn: [
+{
+lesson: "📘 Data Types & Variables\nJava uses types.\nint = whole number\ndouble = decimal\nString = text",
+q: "Create an int variable x = 5",
+a: "int x = 5;",
+h: "Use int and ;"
+},
+{
+lesson: "📘 Variables Continued\nStrings store text using quotes.",
+q: "Create a String name = \"Bob\"",
+a: "String name = \"Bob\";",
+h: "Use String and quotes"
+},
+{
+lesson: "📘 Operators\nOperators perform math.\n+ - * /",
+q: "Create int z = 5 + 3",
+a: "int z = 5 + 3;",
+h: "Use + operator"
+},
+{
+lesson: "📘 Control Flow (if)\nUsed for decisions",
+q: "Write: if x > 10",
+a: "if (x > 10)",
+h: "Use parentheses"
+},
+{
+lesson: "📘 Loops\nRepeat code",
+q: "Write a loop from 0 to 5",
+a: "for(int i=0;i<5;i++)",
+h: "Use i++"
+}
+],
 
-  javascript: {
-    learn: [
-      {
-        q: "JavaScript variables:\nlet x = 5;",
-        a: "let x = 5",
-        h: "Use let"
-      },
-      {
-        q: "Print using:\nconsole.log(\"Hello\");",
-        a: "console.log(\"hello\")",
-        h: "Use console.log"
-      }
-    ],
-    game: [
-      {
-        q: "Create variable y = 10",
-        a: "let y = 10",
-        h: "Use let"
-      },
-      {
-        q: "Write an if statement: x > 5",
-        a: "if(x>5)",
-        h: "Use parentheses"
-      }
-    ]
-  }
+game: [
+{q:"Create int y = 10",a:"int y = 10;",h:"Use int"},
+{q:"Print Hello",a:"System.out.println(\"Hello\");",h:"Use System.out"},
+{q:"If x > 5",a:"if (x > 5)",h:"Use ()"}
+]
+},
+
+python: {
+learn: [
+{
+lesson: "📘 Variables\nPython has no types",
+q: "x = 5",
+a: "x = 5",
+h: "No int needed"
+},
+{
+lesson: "📘 Strings\nText uses quotes",
+q: "name = \"Bob\"",
+a: "name = \"Bob\"",
+h: "Use quotes"
+},
+{
+lesson: "📘 Operators\n+ - * /",
+q: "z = 5 + 3",
+a: "z = 5 + 3",
+h: "Use +"
+},
+{
+lesson: "📘 If Statements",
+q: "if x > 10:",
+a: "if x > 10:",
+h: "Use :"
+},
+{
+lesson: "📘 Loops",
+q: "for i in range(5):",
+a: "for i in range(5):",
+h: "Use range"
+}
+],
+
+game: [
+{q:"y = 10",a:"y = 10",h:"Assign value"},
+{q:"print Hello",a:"print(\"Hello\")",h:"Use print"},
+{q:"if x > 5",a:"if x > 5:",h:"Use :"}
+]
+},
+
+javascript: {
+learn: [
+{
+lesson: "📘 Variables\nUse let",
+q: "let x = 5;",
+a: "let x = 5",
+h: "Use let"
+},
+{
+lesson: "📘 Strings",
+q: "let name = \"Bob\";",
+a: "let name = \"Bob\"",
+h: "Use quotes"
+},
+{
+lesson: "📘 Operators",
+q: "let z = 5 + 3;",
+a: "let z = 5 + 3",
+h: "Use +"
+},
+{
+lesson: "📘 If Statements",
+q: "if(x > 10)",
+a: "if(x > 10)",
+h: "Use ()"
+},
+{
+lesson: "📘 Loops",
+q: "for(let i=0;i<5;i++)",
+a: "for(let i=0;i<5;i++)",
+h: "Use i++"
+}
+],
+
+game: [
+{q:"let y = 10",a:"let y = 10",h:"Use let"},
+{q:"console log hello",a:"console.log(\"Hello\")",h:"Use console.log"},
+{q:"if x > 5",a:"if(x > 5)",h:"Use ()"}
+]
+}
+
 };
 
 // ===== LOGIC =====
 
 function normalize(t){
-  return t.toLowerCase().replace(/\s+/g,'').replace(/;/g,'');
+return t.toLowerCase().replace(/\s+/g,'').replace(/;/g,'');
 }
 
 function chooseMode(m){
-  mode = m;
-  document.getElementById("start").style.display = "none";
-  document.getElementById("language").style.display = "block";
+mode = m;
+document.getElementById("start").style.display = "none";
+document.getElementById("language").style.display = "block";
 }
 
 function setLanguage(lang){
-  language = lang;
-  currentSet = content[lang][mode];
-  score = 0;
-  current = -1;
+language = lang;
+currentSet = content[lang][mode];
+score = 0;
+current = -1;
 
-  document.getElementById("language").style.display = "none";
-  document.getElementById("app").style.display = "block";
+document.getElementById("language").style.display = "none";
+document.getElementById("app").style.display = "block";
 
-  nextStep();
+nextStep();
 }
 
 function nextStep(){
-  current++;
+current++;
 
-  if(current >= currentSet.length){
-    document.getElementById("question").textContent = "🎉 Finished!";
-    return;
-  }
+if(current >= currentSet.length){
+document.getElementById("question").textContent = "🎉 Finished!";
+document.getElementById("lesson").textContent = "";
+return;
+}
 
-  document.getElementById("question").textContent = currentSet[current].q;
-  document.getElementById("code").value = "";
-  document.getElementById("result").textContent = "";
-  document.getElementById("hint").textContent = "";
+document.getElementById("lesson").textContent =
+mode === "learn" ? currentSet[current].lesson : "";
 
-  document.getElementById("progress").textContent =
-    `${mode.toUpperCase()} | ${language.toUpperCase()} | Step ${current+1}/${currentSet.length}`;
+document.getElementById("question").textContent =
+mode === "learn" ? "Try this: " + currentSet[current].q : currentSet[current].q;
 
-  document.getElementById("score").textContent = `Score: ${score}`;
+document.getElementById("code").value = "";
+document.getElementById("result").textContent = "";
+document.getElementById("hint").textContent = "";
+
+document.getElementById("progress").textContent =
+`${mode.toUpperCase()} | ${language.toUpperCase()} | Step ${current+1}/${currentSet.length}`;
+
+document.getElementById("score").textContent = `Score: ${score}`;
 }
 
 function checkAnswer(){
-  const user = normalize(document.getElementById("code").value);
-  const correct = normalize(currentSet[current].a);
+const user = normalize(document.getElementById("code").value);
+const correct = normalize(currentSet[current].a);
 
-  if(user.includes(correct)){
-    document.getElementById("result").textContent = "✅ Correct!";
-    score++;
-  } else {
-    document.getElementById("result").textContent = "❌ Try again!";
-    document.getElementById("hint").textContent = "Hint: " + currentSet[current].h;
-  }
+if(user.includes(correct)){
+document.getElementById("result").textContent = "✅ Correct!";
+score++;
+} else {
+document.getElementById("result").textContent = "❌ Try again!";
+document.getElementById("hint").textContent = "Hint: " + currentSet[current].h;
+}
 
-  document.getElementById("score").textContent = `Score: ${score}`;
+document.getElementById("score").textContent = `Score: ${score}`;
 }
 </script>
 
