@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Code Tutor</title>
+  <title>Code Learning Platform</title>
   <style>
     body {
       font-family: Arial;
@@ -11,18 +11,18 @@
       padding: 30px;
     }
 
+    button, select {
+      padding: 10px;
+      margin: 5px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
     textarea {
       width: 80%;
       height: 120px;
       margin-top: 10px;
       font-size: 16px;
-    }
-
-    button {
-      padding: 10px 20px;
-      margin: 5px;
-      font-size: 16px;
-      cursor: pointer;
     }
 
     .card {
@@ -35,27 +35,34 @@
 
     #result { margin-top: 10px; }
     #hint { color: #38bdf8; }
-    #score { margin-top: 10px; color: #facc15; }
+    #score { color: #facc15; }
   </style>
 </head>
 <body>
 
-<h1>💻 Interactive Coding Tutor</h1>
+<h1>💻 Code Learning Platform</h1>
 
-<div>
-  <button onclick="setDifficulty('easy')">Easy</button>
-  <button onclick="setDifficulty('medium')">Medium</button>
-  <button onclick="setDifficulty('hard')">Hard</button>
+<div id="start">
+  <p>Do you know how to code?</p>
+  <button onclick="chooseMode('learn')">No, Teach Me</button>
+  <button onclick="chooseMode('game')">Yes, Test Me</button>
 </div>
 
-<div class="card">
-  <p id="progress"></p>
-  <p id="question">Select a difficulty to start</p>
+<div id="language" style="display:none;">
+  <p>Choose a language:</p>
+  <button onclick="setLanguage('java')">Java</button>
+  <button onclick="setLanguage('python')">Python</button>
+  <button onclick="setLanguage('javascript')">JavaScript</button>
+</div>
 
-  <textarea id="code" placeholder="Type your code..."></textarea><br>
+<div id="app" class="card" style="display:none;">
+  <p id="progress"></p>
+  <p id="question"></p>
+
+  <textarea id="code" placeholder="Type your code here..."></textarea><br>
 
   <button onclick="checkAnswer()">Check</button>
-  <button onclick="nextQuestion()">Next</button>
+  <button onclick="nextStep()">Next</button>
 
   <p id="result"></p>
   <p id="hint"></p>
@@ -63,38 +70,123 @@
 </div>
 
 <script>
-let score = 0;
+let mode = "";
+let language = "";
 let current = -1;
+let score = 0;
 let currentSet = [];
 
-const sets = {
-  easy: [
-    {q:"Create a variable x = 5", a:"let x = 5", h:"Use let"},
-    {q:"Create variable y = 10", a:"let y = 10", h:"Same pattern"}
-  ],
-  medium: [
-    {q:"Write a function called greet", a:"function greet()", h:"Use function"},
-    {q:"If x > 10", a:"if (x > 10)", h:"Use parentheses"}
-  ],
-  hard: [
-    {q:"Write a for loop from 0 to 5", a:"for(let i=0;i<5;i++)", h:"Use i++"},
-    {q:"Console log 'Hello'", a:"console.log('hello')", h:"Use console.log"}
-  ]
+// ===== CONTENT =====
+const content = {
+  java: {
+    learn: [
+      {
+        q: "In Java, we create variables using types. Example:\nint x = 5;\nTry typing that below.",
+        a: "int x = 5;",
+        h: "Use int and ;"
+      },
+      {
+        q: "Java prints using:\nSystem.out.println(\"Hello\");\nTry it.",
+        a: "system.out.println(\"hello\");",
+        h: "Exact spelling matters"
+      }
+    ],
+    game: [
+      {
+        q: "Create an int variable y = 10",
+        a: "int y = 10;",
+        h: "Use int"
+      },
+      {
+        q: "Write a for loop from 0 to 5",
+        a: "for(int i=0;i<5;i++)",
+        h: "Use i++"
+      }
+    ]
+  },
+
+  python: {
+    learn: [
+      {
+        q: "Python variables don’t need types:\nx = 5\nTry it.",
+        a: "x = 5",
+        h: "No int needed"
+      },
+      {
+        q: "Print in Python:\nprint(\"Hello\")",
+        a: "print(\"hello\")",
+        h: "Use print()"
+      }
+    ],
+    game: [
+      {
+        q: "Create variable y = 10",
+        a: "y = 10",
+        h: "Simple assignment"
+      },
+      {
+        q: "Write a loop from 0 to 5",
+        a: "for i in range(5)",
+        h: "Use range()"
+      }
+    ]
+  },
+
+  javascript: {
+    learn: [
+      {
+        q: "JavaScript variables:\nlet x = 5;",
+        a: "let x = 5",
+        h: "Use let"
+      },
+      {
+        q: "Print using:\nconsole.log(\"Hello\");",
+        a: "console.log(\"hello\")",
+        h: "Use console.log"
+      }
+    ],
+    game: [
+      {
+        q: "Create variable y = 10",
+        a: "let y = 10",
+        h: "Use let"
+      },
+      {
+        q: "Write an if statement: x > 5",
+        a: "if(x>5)",
+        h: "Use parentheses"
+      }
+    ]
+  }
 };
 
+// ===== LOGIC =====
+
 function normalize(t){
-  return t.toLowerCase().replace(/\s+/g,'');
+  return t.toLowerCase().replace(/\s+/g,'').replace(/;/g,'');
 }
 
-function setDifficulty(level){
-  currentSet = sets[level];
+function chooseMode(m){
+  mode = m;
+  document.getElementById("start").style.display = "none";
+  document.getElementById("language").style.display = "block";
+}
+
+function setLanguage(lang){
+  language = lang;
+  currentSet = content[lang][mode];
   score = 0;
   current = -1;
-  nextQuestion();
+
+  document.getElementById("language").style.display = "none";
+  document.getElementById("app").style.display = "block";
+
+  nextStep();
 }
 
-function nextQuestion(){
+function nextStep(){
   current++;
+
   if(current >= currentSet.length){
     document.getElementById("question").textContent = "🎉 Finished!";
     return;
@@ -106,10 +198,9 @@ function nextQuestion(){
   document.getElementById("hint").textContent = "";
 
   document.getElementById("progress").textContent =
-    `Question ${current+1} / ${currentSet.length}`;
+    `${mode.toUpperCase()} | ${language.toUpperCase()} | Step ${current+1}/${currentSet.length}`;
 
-  document.getElementById("score").textContent =
-    `Score: ${score}`;
+  document.getElementById("score").textContent = `Score: ${score}`;
 }
 
 function checkAnswer(){
@@ -121,12 +212,10 @@ function checkAnswer(){
     score++;
   } else {
     document.getElementById("result").textContent = "❌ Try again!";
-    document.getElementById("hint").textContent =
-      "Hint: " + currentSet[current].h;
+    document.getElementById("hint").textContent = "Hint: " + currentSet[current].h;
   }
 
-  document.getElementById("score").textContent =
-    `Score: ${score}`;
+  document.getElementById("score").textContent = `Score: ${score}`;
 }
 </script>
 
