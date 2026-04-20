@@ -20,7 +20,7 @@
 
     textarea {
       width: 80%;
-      height: 120px;
+      height: 140px;
       margin-top: 10px;
       font-size: 16px;
     }
@@ -35,9 +35,8 @@
 
     #lesson {
       color: #38bdf8;
-      margin-bottom: 15px;
       white-space: pre-line;
-      font-size: 17px;
+      margin-bottom: 10px;
     }
 
     #score { color: #facc15; }
@@ -56,13 +55,10 @@
 <div id="language" style="display:none;">
   <p>Choose a language:</p>
   <button onclick="setLanguage('java')">Java</button>
-  <button onclick="setLanguage('python')">Python</button>
-  <button onclick="setLanguage('javascript')">JavaScript</button>
 </div>
 
 <div id="app" class="card" style="display:none;">
   <p id="progress"></p>
-
   <p id="lesson"></p>
   <p id="question"></p>
 
@@ -78,153 +74,47 @@
 
 <script>
 let mode = "";
-let language = "";
 let current = -1;
 let score = 0;
 let currentSet = [];
 
-// ===== CONTENT (NOW WITH FULL TEACHING) =====
+// ===== COURSE =====
 const content = {
 
 java: {
 learn: [
 
-{
-lesson: "📘 VARIABLES\nA variable stores data.\nIn Java, you must declare the type.\nExample:\nint x = 5;",
-q: "Create a variable x equal to 5",
-a: "int x = 5;",
-h: "Use int and ;"
-},
+{lesson:"📘 INT\nWhole numbers", q:"int x = 5", a:"int x = 5;", h:"Use int"},
+{lesson:"📘 DOUBLE\nDecimals", q:"double y = 3.5", a:"double y = 3.5;", h:"Use double"},
+{lesson:"📘 STRING\nText", q:"String name = \"Bob\"", a:"String name = \"Bob\";", h:"Use String"},
 
-{
-lesson: "📘 ADDITION (+)\nThe + operator adds numbers together.\nExample:\nint x = 5 + 3; // x becomes 8",
-q: "Add two numbers so that x equals 11",
-a: "int x = 5 + 6;",
-h: "Use + to add numbers"
-},
+{lesson:"📘 OPERATORS\n+ - * / %", q:"int x = 10 % 3", a:"int x = 10 % 3;", h:"Use %"},
+{lesson:"📘 IF", q:"if(x > 5)", a:"if(x > 5)", h:"Use ()"},
+{lesson:"📘 IF ELSE", q:"if(x > 5) else", a:"if(x > 5) else", h:"Include else"},
 
-{
-lesson: "📘 STRINGS\nStrings store text using quotes.\nExample:\nString name = \"Bob\";",
-q: "Create a String name = \"Bob\"",
-a: "String name = \"Bob\";",
-h: "Use quotes and String"
-},
+{lesson:"📘 FOR LOOP", q:"for(int i=0;i<5;i++)", a:"for(int i=0;i<5;i++)", h:"Use i++"},
+{lesson:"📘 WHILE LOOP", q:"while(x < 5)", a:"while(x < 5)", h:"Use while"},
 
+// 🔥 HARD FINAL TEST
 {
-lesson: "📘 IF STATEMENTS\nUsed to make decisions.\nExample:\nif (x > 10) { }",
-q: "Write: if x > 10",
-a: "if (x > 10)",
-h: "Use parentheses"
-},
+lesson:
+"🎓 FINAL EXAM\nWrite a program that:\n\n" +
+"- Creates int x = 0\n" +
+"- Uses a loop from 0 to 10\n" +
+"- Uses if/else:\n" +
+"   • If number is even → print 'Even'\n" +
+"   • Else → print 'Odd'\n" +
+"- Uses % operator\n" +
+"- Prints output",
 
-{
-lesson: "📘 LOOPS\nLoops repeat code.\nExample:\nfor(int i=0;i<5;i++)",
-q: "Write a loop from 0 to 5",
-a: "for(int i=0;i<5;i++)",
-h: "Use i++"
+q:"Write full program with loop + if/else + modulo + print",
+a:"FINAL",
+h:"Use all concepts"
 }
 
 ],
 
-game: [
-{q:"Create int y = 10",a:"int y = 10;",h:"Use int"},
-{q:"Print Hello",a:"System.out.println(\"Hello\");",h:"Use System.out"},
-{q:"If x > 5",a:"if (x > 5)",h:"Use ()"}
-]
-},
-
-python: {
-learn: [
-
-{
-lesson: "📘 VARIABLES\nPython does not need types.\nExample:\nx = 5",
-q: "Create x = 5",
-a: "x = 5",
-h: "No type needed"
-},
-
-{
-lesson: "📘 ADDITION (+)\nUse + to add numbers.\nExample:\nx = 5 + 3",
-q: "Make x equal 11 using addition",
-a: "x = 5 + 6",
-h: "Use +"
-},
-
-{
-lesson: "📘 STRINGS\nUse quotes for text.",
-q: "name = \"Bob\"",
-a: "name = \"Bob\"",
-h: "Use quotes"
-},
-
-{
-lesson: "📘 IF STATEMENTS",
-q: "if x > 10:",
-a: "if x > 10:",
-h: "Use :"
-},
-
-{
-lesson: "📘 LOOPS",
-q: "for i in range(5):",
-a: "for i in range(5):",
-h: "Use range"
-}
-
-],
-
-game: [
-{q:"y = 10",a:"y = 10",h:"Assign value"},
-{q:"print Hello",a:"print(\"Hello\")",h:"Use print"},
-{q:"if x > 5",a:"if x > 5:",h:"Use :"}
-]
-},
-
-javascript: {
-learn: [
-
-{
-lesson: "📘 VARIABLES\nUse let to create variables.\nExample:\nlet x = 5;",
-q: "Create x = 5",
-a: "let x = 5",
-h: "Use let"
-},
-
-{
-lesson: "📘 ADDITION (+)\nAdds numbers.\nExample:\nlet x = 5 + 3;",
-q: "Make x equal 11",
-a: "let x = 5 + 6",
-h: "Use +"
-},
-
-{
-lesson: "📘 STRINGS",
-q: "let name = \"Bob\"",
-a: "let name = \"Bob\"",
-h: "Use quotes"
-},
-
-{
-lesson: "📘 IF STATEMENTS",
-q: "if(x > 10)",
-a: "if(x > 10)",
-h: "Use ()"
-},
-
-{
-lesson: "📘 LOOPS",
-q: "for(let i=0;i<5;i++)",
-a: "for(let i=0;i<5;i++)",
-h: "Use i++"
-}
-
-],
-
-game: [
-{q:"let y = 10",a:"let y = 10",h:"Use let"},
-{q:"console log hello",a:"console.log(\"Hello\")",h:"Use console.log"},
-{q:"if x > 5",a:"if(x > 5)",h:"Use ()"}
-]
+game: []
 }
 
 };
@@ -241,9 +131,8 @@ document.getElementById("start").style.display = "none";
 document.getElementById("language").style.display = "block";
 }
 
-function setLanguage(lang){
-language = lang;
-currentSet = content[lang][mode];
+function setLanguage(){
+currentSet = content.java.learn;
 score = 0;
 current = -1;
 
@@ -257,39 +146,85 @@ function nextStep(){
 current++;
 
 if(current >= currentSet.length){
-document.getElementById("question").textContent = "🎉 Finished!";
+document.getElementById("question").textContent = "🎉 Course Complete!";
 document.getElementById("lesson").textContent = "";
 return;
 }
 
-document.getElementById("lesson").textContent =
-mode === "learn" ? currentSet[current].lesson : "";
-
-document.getElementById("question").textContent =
-mode === "learn"
-? "👉 Now try: " + currentSet[current].q
-: currentSet[current].q;
+document.getElementById("lesson").textContent = currentSet[current].lesson;
+document.getElementById("question").textContent = "👉 Try: " + currentSet[current].q;
 
 document.getElementById("code").value = "";
 document.getElementById("result").textContent = "";
 document.getElementById("hint").textContent = "";
 
 document.getElementById("progress").textContent =
-`${mode.toUpperCase()} | ${language.toUpperCase()} | Step ${current+1}/${currentSet.length}`;
+`${current+1}/${currentSet.length}`;
 
 document.getElementById("score").textContent = `Score: ${score}`;
 }
 
 function checkAnswer(){
-const user = normalize(document.getElementById("code").value);
+
+const user = document.getElementById("code").value.toLowerCase();
+
+// ===== FINAL CHECK =====
+if(currentSet[current].a === "FINAL"){
+
+let feedback = [];
+
+if(!user.includes("int x")){
+feedback.push("❌ Missing variable (int x)");
+}
+
+if(!user.includes("for(") && !user.includes("while(")){
+feedback.push("❌ Missing loop");
+}
+
+if(!user.includes("%")){
+feedback.push("❌ Missing modulo (%) for even/odd");
+}
+
+if(!user.includes("if(")){
+feedback.push("❌ Missing if statement");
+}
+
+if(!user.includes("else")){
+feedback.push("❌ Missing else statement");
+}
+
+if(!user.includes("print") && !user.includes("system.out")){
+feedback.push("❌ Missing output");
+}
+
+if(!user.includes("i++")){
+feedback.push("❌ Loop missing increment (i++)");
+}
+
+if(feedback.length === 0){
+document.getElementById("result").textContent =
+"🎉 Perfect! This is a full correct solution!";
+score++;
+} else {
+document.getElementById("result").textContent =
+feedback.join(" | ");
+}
+
+document.getElementById("score").textContent = `Score: ${score}`;
+return;
+}
+
+// ===== NORMAL CHECK =====
+const userNorm = normalize(user);
 const correct = normalize(currentSet[current].a);
 
-if(user.includes(correct)){
+if(userNorm.includes(correct)){
 document.getElementById("result").textContent = "✅ Correct!";
 score++;
 } else {
 document.getElementById("result").textContent = "❌ Try again!";
-document.getElementById("hint").textContent = "Hint: " + currentSet[current].h;
+document.getElementById("hint").textContent =
+"Hint: " + currentSet[current].h;
 }
 
 document.getElementById("score").textContent = `Score: ${score}`;
