@@ -54,7 +54,7 @@
 
 <div id="language" style="display:none;">
   <p>Choose a language:</p>
-  <button onclick="setLanguage('java')">Java</button>
+  <button onclick="setLanguage()">Java</button>
 </div>
 
 <div id="app" class="card" style="display:none;">
@@ -84,32 +84,46 @@ const content = {
 java: {
 learn: [
 
-{lesson:"📘 INT\nWhole numbers", q:"int x = 5", a:"int x = 5;", h:"Use int"},
-{lesson:"📘 DOUBLE\nDecimals", q:"double y = 3.5", a:"double y = 3.5;", h:"Use double"},
-{lesson:"📘 STRING\nText", q:"String name = \"Bob\"", a:"String name = \"Bob\";", h:"Use String"},
+{lesson:"📘 INT\nWhole numbers.\nExample: int x = 5;", q:"Create the variable 'x' that has the value 5", a:"int x = 5;", h:"Use int and ;"},
 
-{lesson:"📘 OPERATORS\n+ - * / %", q:"int x = 10 % 3", a:"int x = 10 % 3;", h:"Use %"},
-{lesson:"📘 IF", q:"if(x > 5)", a:"if(x > 5)", h:"Use ()"},
-{lesson:"📘 IF ELSE", q:"if(x > 5) else", a:"if(x > 5) else", h:"Include else"},
+{lesson:"📘 FLOAT\nDecimal (less precise).\nExample: float y = 3.5f;", q:"Create the variable 'y' that has the value 3.5", a:"float y = 3.5f;", h:"Use float and ;"},
 
-{lesson:"📘 FOR LOOP", q:"for(int i=0;i<5;i++)", a:"for(int i=0;i<5;i++)", h:"Use i++"},
-{lesson:"📘 WHILE LOOP", q:"while(x < 5)", a:"while(x < 5)", h:"Use while"},
+{lesson:"📘 DOUBLE\nMore precise decimal.\nExample: double z = 3.5;", q:"Create the variable 'z' that has the presice value 3.5", a:"double z = 3.5;", h:"Use double and ;"},
 
-// 🔥 HARD FINAL TEST
+{lesson:"📘 STRING\nText must use capital S.\nExample: String name = \"Bob\";", q:"Create name = \"Bob\"", a:"String name = \"Bob\";", h:"Use capital String and quotes"},
+
+{lesson:"📘 ADDITION (+)", q:"Make x equal to five plus six", a:"int x = 5 + 6;", h:"Use + and ;"},
+
+{lesson:"📘 SUBTRACTION (-)", q:"Make x equal to ten minus three", a:"int x = 10 - 3;", h:"Use -"},
+
+{lesson:"📘 MULTIPLICATION (*)", q:"Make x equal to five times two", a:"int x = 5 * 2;", h:"Use *"},
+
+{lesson:"📘 DIVISION (/)", q:"Make x equal to ten divided by two", a:"int x = 10 / 2;", h:"Use /"},
+
+{lesson:"📘 MOD (%)\nRemainder", q:"Make x = 10 % 3", a:"int x = 10 % 3;", h:"Use %"},
+
+{lesson:"📘 IF if(x < 10){}", q:"Make and if statement that would run if x is greater than five", a:"if(x > 5){}", h:"Use ()"},
+
+{lesson:"📘 IF ELSE  if(x < 3){} else{}", q:"Make and if else statement that would run if x is greater than five", a:"if(x > 5){} else{}", h:"Include else"},
+
+{lesson:"📘 FOR LOOP for(int i=1;i<6;i++){}" , q:"Make a loop that will run when an interger i starts at zero, and the loop will run untill i is greater than 5", a:"for(int i=0;i<5;i++){}", h:"Use i++"},
+
+{lesson:"📘 WHILE LOOP  while(x > 5){}", q:"Make a while loop that runs when x less than five", a:"while(x < 5)", h:"Use while"},
+
+// FINAL TEST
 {
 lesson:
-"🎓 FINAL EXAM\nWrite a program that:\n\n" +
-"- Creates int x = 0\n" +
+"FINAL EXAM\nWrite a program that:\n\n" +
+"- Creates int x = 0;\n" +
 "- Uses a loop from 0 to 10\n" +
-"- Uses if/else:\n" +
-"   • If number is even → print 'Even'\n" +
-"   • Else → print 'Odd'\n" +
-"- Uses % operator\n" +
-"- Prints output",
+"- Uses if/else\n" +
+"- Uses % to check even/odd\n" +
+"- Prints Even or Odd\n" +
+"- Uses proper syntax (including ;)",
 
-q:"Write full program with loop + if/else + modulo + print",
+q:"Write full program using all concepts",
 a:"FINAL",
-h:"Use all concepts"
+h:"Use everything you learned"
 }
 
 ],
@@ -122,7 +136,7 @@ game: []
 // ===== LOGIC =====
 
 function normalize(t){
-return t.toLowerCase().replace(/\s+/g,'').replace(/;/g,'');
+return t.toLowerCase().replace(/\s+/g,'');
 }
 
 function chooseMode(m){
@@ -146,7 +160,7 @@ function nextStep(){
 current++;
 
 if(current >= currentSet.length){
-document.getElementById("question").textContent = "🎉 Course Complete!";
+document.getElementById("question").textContent = " Course Complete!";
 document.getElementById("lesson").textContent = "";
 return;
 }
@@ -166,44 +180,49 @@ document.getElementById("score").textContent = `Score: ${score}`;
 
 function checkAnswer(){
 
-const user = document.getElementById("code").value.toLowerCase();
+const user = document.getElementById("code").value;
+const userLower = user.toLowerCase();
 
-// ===== FINAL CHECK =====
+// ===== FINAL TEST =====
 if(currentSet[current].a === "FINAL"){
 
 let feedback = [];
 
 if(!user.includes("int x")){
-feedback.push("❌ Missing variable (int x)");
+feedback.push("❌ Missing variable: int x");
 }
 
-if(!user.includes("for(") && !user.includes("while(")){
+if(!user.includes(";")){
+feedback.push("❌ Missing semicolons (;)");
+}
+
+if(!userLower.includes("for(") && !userLower.includes("while(")){
 feedback.push("❌ Missing loop");
 }
 
-if(!user.includes("%")){
-feedback.push("❌ Missing modulo (%) for even/odd");
+if(!userLower.includes("%")){
+feedback.push("❌ Missing modulo (%)");
 }
 
-if(!user.includes("if(")){
+if(!userLower.includes("if(")){
 feedback.push("❌ Missing if statement");
 }
 
-if(!user.includes("else")){
+if(!userLower.includes("else")){
 feedback.push("❌ Missing else statement");
 }
 
-if(!user.includes("print") && !user.includes("system.out")){
-feedback.push("❌ Missing output");
+if(!userLower.includes("system.out")){
+feedback.push("❌ Missing print statement");
 }
 
-if(!user.includes("i++")){
+if(!userLower.includes("i++")){
 feedback.push("❌ Loop missing increment (i++)");
 }
 
 if(feedback.length === 0){
 document.getElementById("result").textContent =
-"🎉 Perfect! This is a full correct solution!";
+"🎉 Perfect! Full correct program!";
 score++;
 } else {
 document.getElementById("result").textContent =
@@ -214,15 +233,32 @@ document.getElementById("score").textContent = `Score: ${score}`;
 return;
 }
 
-// ===== NORMAL CHECK =====
-const userNorm = normalize(user);
-const correct = normalize(currentSet[current].a);
+// ===== NORMAL QUESTIONS =====
 
-if(userNorm.includes(correct)){
+const correct = currentSet[current].a;
+
+let feedback = [];
+
+// Check exact match first
+if(normalize(user).includes(normalize(correct))){
 document.getElementById("result").textContent = "✅ Correct!";
 score++;
 } else {
-document.getElementById("result").textContent = "❌ Try again!";
+
+if(correct.includes(";") && !user.includes(";")){
+feedback.push("❌ Missing semicolon (;)");
+}
+
+// SPECIAL CHECK FOR STRING
+if(correct.includes("String") && !user.includes("String")){
+feedback.push("❌ 'String' must have a capital S");
+}
+
+if(feedback.length === 0){
+feedback.push("❌ Try again!");
+}
+
+document.getElementById("result").textContent = feedback.join(" | ");
 document.getElementById("hint").textContent =
 "Hint: " + currentSet[current].h;
 }
